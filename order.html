@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order for Mother's Day — Ivy & Rose Floral Co.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2C2419',
+            secondary: '#5C4D3C',
+            accent: '#8B9D83',
+            highlight: '#C17F59',
+            background: '#F0EBE3',
+            surface: '#FFFFFF',
+            muted: '#D5CFC6',
+          },
+          fontFamily: {
+            heading: ['"Playfair Display"', 'serif'],
+            body: ['"Source Serif Pro"', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    .form-field {
+      background-color: #FFFFFF;
+      border: 1px solid #D5CFC6;
+      border-radius: 4px;
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .form-field:focus {
+      outline: none;
+      border-color: #8B9D83;
+      box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.15);
+    }
+    .form-field::placeholder {
+      color: #5C4D3C;
+      opacity: 0.5;
+    }
+    .btn-primary {
+      background-color: #2C2419;
+      color: #F0EBE3;
+      transition: background-color 200ms ease, transform 200ms ease;
+    }
+    .btn-primary:hover {
+      background-color: #3d3224;
+      transform: translateY(-1px);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    .fade-up {
+      animation: fadeUp 600ms ease-out forwards;
+    }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    select.form-field {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C4D3C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 44px;
+    }
+    /* Mobile nav */
+    .main-nav {
+      transform: translateX(100%);
+      transition: transform 300ms ease-out;
+    }
+    .main-nav.active {
+      transform: translateX(0);
+    }
+    .nav-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease-out;
+    }
+    .nav-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-background text-primary min-h-screen">
+
+  <!-- Header / Nav -->
+  <header class="border-b border-muted">
+    <div class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
+      <a href="index.html" class="font-heading text-2xl font-normal tracking-wide text-primary hover:text-accent transition-colors duration-200">
+        Ivy & Rose Floral Co.
+      </a>
+      <nav class="hidden sm:flex items-center gap-8">
+        <a href="index.html" class="font-ui text-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-200">Home</a>
+        <a href="gallery.html" class="font-ui text-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-200">Bouquets</a>
+        <a href="order.html" class="font-ui text-sm uppercase tracking-widest text-primary border-b border-primary pb-0.5">Order</a>
+      </nav>
+      <!-- Mobile menu button -->
+      <button class="sm:hidden menu-toggle p-2" aria-label="Open menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="nav-backdrop fixed inset-0 bg-primary/70 z-[55] sm:hidden" id="navBackdrop"></div>
+    <nav class="main-nav sm:hidden fixed top-0 right-0 h-full w-72 bg-surface z-[60] pt-24 px-6 shadow-2xl border-l border-muted" id="mobileNavPanel">
+      <div class="flex flex-col gap-1">
+        <a href="index.html" class="font-ui text-sm uppercase tracking-widest text-primary font-medium py-3 px-2 rounded-sm hover:bg-background/60 transition-colors duration-200">Home</a>
+        <a href="gallery.html" class="font-ui text-sm uppercase tracking-widest text-primary font-medium py-3 px-2 rounded-sm hover:bg-background/60 transition-colors duration-200">Bouquets</a>
+        <a href="order.html" class="font-ui text-sm uppercase tracking-widest text-primary font-medium py-3 px-2 rounded-sm hover:bg-background/60 transition-colors duration-200">Order</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto px-6 py-16 md:py-24">
+
+    <!-- Page Title -->
+    <div class="text-center mb-10 fade-up">
+      <h1 class="font-heading text-4xl md:text-5xl font-normal leading-tight text-primary mb-4">
+        Order for Mother's Day
+      </h1>
+      <p class="font-body text-lg text-secondary leading-relaxed max-w-md mx-auto">
+        A bouquet as thoughtful as your love. Let us craft something beautiful for the one who raised you.
+      </p>
+    </div>
+
+    <!-- Deadline Banner -->
+    <div class="mb-12 bg-highlight/10 border border-highlight/20 rounded px-6 py-4 text-center fade-up" style="animation-delay: 100ms;">
+      <p class="font-ui text-xs uppercase tracking-widest text-highlight">
+        Order by May 8, 2026 for guaranteed Mother's Day delivery
+      </p>
+    </div>
+
+    <!-- Order Form -->
+    <form
+      name="mothers-day-order"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      class="fade-up"
+      style="animation-delay: 200ms;"
+      id="orderForm"
+    >
+
+      <!-- Honeypot -->
+      <p class="hidden">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+
+      <!-- Your Info -->
+      <div class="mb-14">
+        <h2 class="font-heading text-xl font-normal text-primary mb-6 pb-2 border-b border-muted">From You</h2>
+
+        <div class="space-y-6">
+          <div>
+            <label for="yourName" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Your Name <span class="text-highlight">*</span></label>
+            <input type="text" id="yourName" name="your_name" required class="form-field w-full px-4 py-3 font-body text-base text-primary" placeholder="Jane Doe">
+          </div>
+
+          <div>
+            <label for="yourEmail" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Your Email <span class="text-highlight">*</span></label>
+            <input type="email" id="yourEmail" name="your_email" required class="form-field w-full px-4 py-3 font-body text-base text-primary" placeholder="jane@example.com">
+          </div>
+
+          <div>
+            <label for="yourPhone" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Your Phone <span class="text-highlight">*</span></label>
+            <input type="tel" id="yourPhone" name="your_phone" required class="form-field w-full px-4 py-3 font-body text-base text-primary" placeholder="(555) 123-4567">
+          </div>
+        </div>
+      </div>
+
+      <!-- Recipient Info -->
+      <div class="mb-14">
+        <h2 class="font-heading text-xl font-normal text-primary mb-6 pb-2 border-b border-muted">To Recipient</h2>
+
+        <div class="space-y-6">
+          <div>
+            <label for="recipientName" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Recipient Name <span class="text-highlight">*</span></label>
+            <input type="text" id="recipientName" name="recipient_name" required class="form-field w-full px-4 py-3 font-body text-base text-primary" placeholder="Mom">
+          </div>
+
+          <div>
+            <label for="recipientAddress" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Recipient Address <span class="text-highlight">*</span></label>
+            <textarea id="recipientAddress" name="recipient_address" rows="3" required class="form-field w-full px-4 py-3 font-body text-base text-primary resize-y" placeholder="123 Maple Lane, Hamilton, OH 45013"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Details -->
+      <div class="mb-14">
+        <h2 class="font-heading text-xl font-normal text-primary mb-6 pb-2 border-b border-muted">Order Details</h2>
+
+        <div class="space-y-6">
+          <div>
+            <label for="deliveryDate" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Delivery Date <span class="text-highlight">*</span></label>
+            <select id="deliveryDate" name="delivery_date" required class="form-field w-full px-4 py-3 font-body text-base text-primary cursor-pointer">
+              <option value="" disabled selected>Select a delivery date</option>
+              <option value="May 9, 2026">Saturday, May 9, 2026</option>
+              <option value="May 10, 2026">Sunday, May 10, 2026</option>
+              <option value="May 11, 2026">Monday, May 11, 2026</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="bouquet" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Bouquet Selection <span class="text-highlight">*</span></label>
+            <select id="bouquet" name="bouquet" required class="form-field w-full px-4 py-3 font-body text-base text-primary cursor-pointer">
+              <option value="" disabled selected>Choose your bouquet</option>
+              <option value="Mini (5 Stems) - $15">Mini (5 Stems) — $15</option>
+              <option value="Small (8 Stems) - $25">Small (8 Stems) — $25</option>
+              <option value="Medium (17 Stems) - $50">Medium (17 Stems) — $50</option>
+              <option value="Large (27 Stems) - $75">Large (27 Stems) — $75</option>
+              <option value="X-Large (45 Stems) - $100">X-Large (45 Stems) — $100</option>
+              <option value="Designer's Choice (32 Stems) - $85">Designer's Choice (32 Stems) — $85</option>
+              <option value="Custom Creation - Starting at $50">Custom Creation — Starting at $50</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="customMessage" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Custom Message</label>
+            <textarea id="customMessage" name="custom_message" rows="4" class="form-field w-full px-4 py-3 font-body text-base text-primary resize-y" placeholder="Happy Mother's Day, Mom! Love you always."></textarea>
+          </div>
+
+          <div>
+            <label for="specialInstructions" class="block font-ui text-xs uppercase tracking-widest text-secondary mb-2">Special Instructions</label>
+            <textarea id="specialInstructions" name="special_instructions" rows="3" class="form-field w-full px-4 py-3 font-body text-base text-primary resize-y" placeholder="Leave at front door"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery Notice -->
+      <div class="mb-10 bg-accent/10 border border-accent/20 rounded px-5 py-4">
+        <p class="font-body text-base text-secondary leading-relaxed">
+          <span class="font-ui text-xs uppercase tracking-widest text-accent mr-2">Delivery</span>
+          Delivery within 10 miles of Hamilton. Free pickup available.
+        </p>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-primary w-full py-4 rounded-sm font-ui text-xs uppercase tracking-widest cursor-pointer">
+        Place Order
+      </button>
+    </form>
+
+    <!-- Success Message (hidden by default) -->
+    <div id="successMessage" class="hidden text-center py-16 fade-up">
+      <div class="mb-6 flex justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8B9D83" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-80"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+      <h2 class="font-heading text-3xl font-normal text-primary mb-4">Thank You!</h2>
+      <p class="font-body text-lg text-secondary leading-relaxed max-w-md mx-auto">
+        We'll confirm your order within 24 hours. Your mom is going to love it.
+      </p>
+      <a href="index.html" class="inline-block mt-8 font-ui text-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-200 border-b border-transparent hover:border-primary pb-0.5">
+        Back to Home
+      </a>
+    </div>
+
+    <!-- Contact -->
+    <div class="mt-16 pt-10 border-t border-muted text-center fade-up" style="animation-delay: 300ms;">
+      <p class="font-body text-base text-secondary">
+        Questions? DM us on Instagram at
+        <a href="https://instagram.com/ivyrosefloralco" target="_blank" class="text-primary underline underline-offset-4 decoration-muted hover:decoration-accent transition-colors duration-200">@ivyrosefloralco</a>
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-muted mt-16">
+    <div class="max-w-5xl mx-auto px-6 py-8 text-center">
+      <p class="font-ui text-xs uppercase tracking-widest text-secondary">
+        Ivy & Rose Floral Co. — Hamilton, Ohio
+      </p>
+      <p class="mt-2 text-sm text-secondary">
+        Instagram: <a href="https://instagram.com/ivyrosefloralco" target="_blank" class="text-primary hover:underline">@ivyrosefloralco</a> | Delivery within 10 miles of Hamilton
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.getElementById('mobileNavPanel');
+    const navBackdrop = document.getElementById('navBackdrop');
+
+    function toggleNav() {
+      const isOpen = mainNav.classList.toggle('active');
+      navBackdrop.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    menuToggle.addEventListener('click', toggleNav);
+    navBackdrop.addEventListener('click', toggleNav);
+
+    document.querySelectorAll('#mobileNavPanel a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+        navBackdrop.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+        toggleNav();
+      }
+    });
+
+    // Netlify form success handling
+    const orderForm = document.getElementById('orderForm');
+    const successMessage = document.getElementById('successMessage');
+
+    // Check if we're returning from a successful Netlify form submission
+    if (window.location.search.includes('success=true') || window.location.hash === '#success') {
+      orderForm.classList.add('hidden');
+      successMessage.classList.remove('hidden');
+    }
+
+    // Intercept form submission for SPA-like success state
+    orderForm.addEventListener('submit', function(e) {
+      // If we're viewing via file:// or a non-Netlify host, prevent default and show success
+      if (window.location.protocol === 'file:' || !document.querySelector('form').action) {
+        e.preventDefault();
+        orderForm.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      // Otherwise let Netlify handle it; it will redirect back with success param
+    });
+  </script>
+</body>
+</html>
