@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — Ivy & Rose Floral Co.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#2C2419',
+                        taupe: '#5C4D3C',
+                        sage: '#8B9D83',
+                        terracotta: '#C17F59',
+                        cream: '#F0EBE3',
+                        stone: '#D5CFC6',
+                        surface: '#FFFFFF',
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'source': ['Source Serif Pro', 'serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream text-espresso font-source antialiased min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-stone/40">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="font-playfair text-xl tracking-wide">Ivy & Rose</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Home</a>
+                    <a href="gallery.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Our Bouquets</a>
+                    <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Order / Ask</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1 flex items-center justify-center px-4">
+        <div class="text-center py-24">
+            <p class="font-inter text-sm uppercase tracking-[0.15em] text-sage mb-4">404</p>
+            <h1 class="font-playfair text-4xl md:text-5xl mb-6">Page Not Found</h1>
+            <p class="text-taupe text-lg mb-8 max-w-md mx-auto">
+                Looks like this page took a detour. Let's get you back to the flowers.
+            </p>
+            <a href="index.html" class="inline-flex items-center px-8 py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors duration-200">
+                Back to Home
+            </a>
+        </div>
+    </main>
+
+    <footer class="py-8 border-t border-stone/40">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
+            <p class="text-taupe text-sm">© 2026 Ivy & Rose Floral Co. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
