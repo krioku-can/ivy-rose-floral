@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order — Ivy & Rose Floral Co.</title>
-  <meta name="description" content="Order handcrafted bouquets from Ivy & Rose Floral Co. in Hamilton, Ohio. Free delivery within 10 miles.">
+  <meta name="description" content="Order handcrafted arrangements from Ivy & Rose Floral Co. in Hamilton, Ohio. Pickup or delivery available.">
   <meta property="og:title" content="Order Flowers — Ivy & Rose Floral Co.">
-  <meta property="og:description" content="Handcrafted bouquets delivered with care in Hamilton, Ohio.">
-  <meta property="og:image" content="https://ivyrosefloralco.com/images/bouquet-1.jpg">
+  <meta property="og:description" content="Handcrafted arrangements delivered with care in Hamilton, Ohio.">
+  <meta property="og:image" content="https://ivyrosefloralco.com/images/bouquet-mothers-day.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://ivyrosefloralco.com/order.html">
@@ -38,7 +38,6 @@
     .skip-link:focus { top: 0; }
     @media (prefers-reduced-motion: reduce) {
       .fade-up { opacity: 1; animation: none; }
-      .stagger-1, .stagger-2, .stagger-3 { animation-delay: 0ms; }
       .btn-primary { transition: none; }
     }
     .form-field {
@@ -55,19 +54,17 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C4D3C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px;
     }
-    .bouquet-card {
+    .method-toggle {
       border: 2px solid #D5CFC6; border-radius: 4px; transition: all 200ms ease; cursor: pointer;
     }
-    .bouquet-card:hover { border-color: #8B9D83; }
-    .bouquet-card.selected {
+    .method-toggle:hover { border-color: #8B9D83; }
+    .method-toggle.active {
       border-color: #8B9D83; box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.25);
     }
-    .bouquet-card:focus { outline: none; border-color: #8B9D83; box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.25); }
     .fade-up { animation: fadeUp 600ms ease-out forwards; opacity: 0; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .stagger-1 { animation-delay: 100ms; }
-    .stagger-2 { animation-delay: 200ms; }
-    .stagger-3 { animation-delay: 300ms; }
+    .delivery-section { max-height: 0; overflow: hidden; transition: max-height 400ms ease-out, opacity 300ms ease; opacity: 0; }
+    .delivery-section.open { max-height: 800px; opacity: 1; }
   </style>
 </head>
 <body class="bg-cream text-espresso font-source antialiased">
@@ -76,7 +73,7 @@
   <!-- Urgency Banner -->
   <div class="bg-terracotta text-cream text-center py-3 px-4">
     <p class="font-inter text-sm font-medium">
-      ⏰ Order by May 8 for guaranteed Mother's Day delivery
+      ⏰ Order by May 7 for guaranteed Mother's Day delivery — Limited timeslots available
     </p>
   </div>
 
@@ -96,16 +93,21 @@
   <main id="main" class="max-w-2xl mx-auto px-6 py-10 md:py-14">
     <div class="text-center mb-8 fade-up">
       <h1 class="font-playfair text-4xl md:text-5xl font-normal leading-tight mb-3">Place Your Order</h1>
-      <p class="text-taupe text-lg">Handcrafted bouquets + free delivery within 10 miles</p>
+      <p class="text-taupe text-lg">Handcrafted arrangements — pickup or delivery</p>
     </div>
 
-    <!-- Instagram Link -->
+    <!-- Contact Links -->
     <div class="mb-8 text-center fade-up stagger-1">
-      <p class="text-sm text-taupe mb-2">Questions? DM us on Instagram</p>
-      <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso border border-espresso px-5 py-2.5 rounded-sm hover:bg-espresso hover:text-cream transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        @ivyrosefloralco
-      </a>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso border border-espresso px-5 py-2.5 rounded-sm hover:bg-espresso hover:text-cream transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          @ivyrosefloralco
+        </a>
+        <a href="mailto:ivyrosefloralco@gmail.com" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso border border-espresso px-5 py-2.5 rounded-sm hover:bg-espresso hover:text-cream transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          ivyrosefloralco@gmail.com
+        </a>
+      </div>
     </div>
 
     <!-- Order Form -->
@@ -115,37 +117,19 @@
 
       <!-- Bouquet Selection -->
       <div class="mb-10">
-        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Choose Your Bouquet</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <!-- Elegant Ivory -->
-          <label class="bouquet-card block cursor-pointer" onclick="selectBouquet(this)" tabindex="0" role="radio" aria-checked="false">
-            <input type="radio" name="bouquet" value="Elegant Ivory" class="hidden">
-            <div class="relative">
-              <img src="images/bouquet-1.jpg" alt="Elegant Ivory bouquet" class="w-full h-48 object-cover" loading="lazy" decoding="async">
-            </div>
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Your Arrangement</h2>
+        <div class="max-w-md mx-auto">
+          <div class="bg-cream rounded-sm overflow-hidden border-2 border-sage shadow-[0_0_0_3px_rgba(139,157,131,0.25)]">
+            <img src="images/bouquet-mothers-day.jpg" alt="Mother's Day bouquet — handcrafted with fresh seasonal blooms" class="w-full h-56 object-cover" loading="lazy" decoding="async">
             <div class="p-4">
               <div class="flex items-center justify-between mb-1">
-                <span class="font-playfair text-lg">Elegant Ivory</span>
+                <span class="font-playfair text-lg">Mother's Day Bouquet</span>
                 <span class="font-playfair text-xl font-bold">$65</span>
               </div>
-              <p class="text-taupe text-sm">White roses, burgundy calla lilies, and Scottish thistle with eucalyptus.</p>
+              <p class="text-taupe text-sm">Handcrafted with fresh, seasonal blooms.</p>
             </div>
-          </label>
-
-          <!-- Sunset Garden -->
-          <label class="bouquet-card block cursor-pointer" onclick="selectBouquet(this)" tabindex="0" role="radio" aria-checked="false">
-            <input type="radio" name="bouquet" value="Sunset Garden" class="hidden">
-            <div class="relative">
-              <img src="images/bouquet-2.jpg" alt="Sunset Garden bouquet" class="w-full h-48 object-cover" loading="lazy" decoding="async">
-            </div>
-            <div class="p-4">
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-playfair text-lg">Sunset Garden</span>
-                <span class="font-playfair text-xl font-bold">$65</span>
-              </div>
-              <p class="text-taupe text-sm">Vibrant pink roses, orange alstroemeria, and carnations with lush greenery.</p>
-            </div>
-          </label>
+          </div>
+          <input type="hidden" name="bouquet" value="Mother's Day Bouquet">
         </div>
       </div>
 
@@ -156,12 +140,29 @@
           <option value="" disabled selected>Choose your size</option>
           <option value="Mini (5 Stems) - $15">Mini (5 Stems) — $15</option>
           <option value="Small (8 Stems) - $25">Small (8 Stems) — $25</option>
-          <option value="Medium (17 Stems) - $50" selected>Medium (17 Stems) — $50</option>
+          <option value="Medium (17 Stems) - $50">Medium (17 Stems) — $50</option>
           <option value="Large (27 Stems) - $75">Large (27 Stems) — $75</option>
           <option value="X-Large (45 Stems) - $100">X-Large (45 Stems) — $100</option>
-          <option value="Designer's Choice (32 Stems) - $85">Designer's Choice (32 Stems) — $85</option>
-          <option value="Custom Creation - Starting at $50">Custom Creation — Starting at $50</option>
+          <option value="Mother's Day Special (17 Stems) - $65">Mother's Day Special (17 Stems) — $65</option>
         </select>
+      </div>
+
+      <!-- Pickup or Delivery -->
+      <div class="mb-10">
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Pickup or Delivery</h2>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <button type="button" class="method-toggle p-4 text-center active" id="pickupBtn" onclick="selectMethod('pickup')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B9D83" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span class="font-inter text-sm uppercase tracking-widest block">Pickup</span>
+            <span class="text-taupe text-xs mt-1 block">No charge</span>
+          </button>
+          <button type="button" class="method-toggle p-4 text-center" id="deliveryBtn" onclick="selectMethod('delivery')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B9D83" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <span class="font-inter text-sm uppercase tracking-widest block">Delivery</span>
+            <span class="text-taupe text-xs mt-1 block">$10 charge</span>
+          </button>
+        </div>
+        <input type="hidden" name="fulfillment_method" id="fulfillmentMethod" value="Pickup">
       </div>
 
       <!-- Your Info -->
@@ -183,25 +184,27 @@
         </div>
       </div>
 
-      <!-- Delivery Info -->
-      <div class="mb-10">
+      <!-- Delivery Info (shown only when delivery selected) -->
+      <div class="delivery-section mb-10" id="deliverySection">
         <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Delivery Info</h2>
         <div class="space-y-4">
           <div>
             <label for="recipient" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Recipient Name <span aria-label="required">*</span></label>
-            <input type="text" id="recipient" name="recipient_name" required autocomplete="name" aria-required="true" class="form-field w-full px-4 py-3 text-base" placeholder="Mom, Grandma, etc.">
+            <input type="text" id="recipient" name="recipient_name" autocomplete="name" class="form-field w-full px-4 py-3 text-base" placeholder="Mom, Grandma, etc.">
           </div>
           <div>
             <label for="address" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Delivery Address <span aria-label="required">*</span></label>
-            <textarea id="address" name="recipient_address" rows="2" required autocomplete="street-address" aria-required="true" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="123 Maple Lane, Hamilton, OH 45013"></textarea>
+            <textarea id="address" name="recipient_address" rows="2" autocomplete="street-address" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="123 Maple Lane, Hamilton, OH 45013"></textarea>
           </div>
           <div>
-            <label for="date" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Delivery Date <span aria-label="required">*</span></label>
-            <select id="date" name="delivery_date" required class="form-field w-full px-4 py-3 text-base cursor-pointer">
-              <option value="" disabled selected>Choose a date</option>
-              <option value="May 9, 2026">Saturday, May 9</option>
-              <option value="May 10, 2026">Sunday, May 10 (Mother's Day)</option>
+            <label for="timeslot" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Delivery Timeslot <span aria-label="required">*</span></label>
+            <select id="timeslot" name="delivery_timeslot" class="form-field w-full px-4 py-3 text-base cursor-pointer">
+              <option value="" disabled selected>Choose a timeslot</option>
+              <option value="8:00 AM - 10:00 AM">8:00 AM – 10:00 AM</option>
+              <option value="10:00 AM - 12:00 PM">10:00 AM – 12:00 PM</option>
+              <option value="12:00 PM - 2:00 PM">12:00 PM – 2:00 PM</option>
             </select>
+            <p class="text-taupe text-xs mt-2">Delivery on Mother's Day, Sunday May 10 only. Limited timeslots available.</p>
           </div>
         </div>
       </div>
@@ -216,14 +219,14 @@
       <!-- Special Instructions -->
       <div class="mb-10">
         <label for="instructions" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Special Instructions</label>
-        <textarea id="instructions" name="special_instructions" rows="2" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="Leave at front door, etc."></textarea>
+        <textarea id="instructions" name="special_instructions" rows="2" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="Leave at door, custom color palette, etc."></textarea>
       </div>
 
-      <!-- Delivery Notice -->
-      <div class="mb-8 bg-sage/10 border border-sage/20 rounded px-5 py-4">
+      <!-- Delivery/Pickup Notice -->
+      <div class="mb-8 bg-sage/10 border border-sage/20 rounded px-5 py-4" id="fulfillmentNotice">
         <p class="font-source text-base text-taupe leading-relaxed">
-          <span class="font-inter text-xs uppercase tracking-widest text-sage mr-2">Delivery</span>
-          Free delivery within 10 miles of Hamilton. Pickup also available.
+          <span class="font-inter text-xs uppercase tracking-widest text-sage mr-2">Pickup</span>
+          Pickup available at no charge. We'll coordinate details after you order.
         </p>
       </div>
 
@@ -233,13 +236,19 @@
       </button>
     </form>
 
-    <!-- Instagram -->
+    <!-- Contact Links -->
     <div class="mt-10 pt-8 border-t border-stone text-center">
-      <p class="text-taupe text-sm mb-2">See more arrangements</p>
-      <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso hover:text-sage transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        @ivyrosefloralco
-      </a>
+      <p class="text-taupe text-sm mb-2">See more arrangements or get in touch</p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso hover:text-sage transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          @ivyrosefloralco
+        </a>
+        <a href="mailto:ivyrosefloralco@gmail.com" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso hover:text-sage transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          ivyrosefloralco@gmail.com
+        </a>
+      </div>
     </div>
   </main>
 
@@ -251,32 +260,43 @@
   </footer>
 
   <script>
-    function selectBouquet(card) {
-      document.querySelectorAll('.bouquet-card').forEach(c => {
-        c.classList.remove('selected');
-        c.setAttribute('aria-checked', 'false');
-      });
-      card.classList.add('selected');
-      card.setAttribute('aria-checked', 'true');
-      card.querySelector('input[type="radio"]').checked = true;
-    }
-    document.querySelectorAll('.bouquet-card').forEach(card => {
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectBouquet(card); }
-      });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-      const params = new URLSearchParams(window.location.search);
-      const bouquetParam = params.get('bouquet');
-      if (bouquetParam) {
-        document.querySelectorAll('.bouquet-card').forEach(card => {
-          const input = card.querySelector('input[type="radio"]');
-          if (input && input.value.toLowerCase().replace(/\s+/g, '-') === bouquetParam.toLowerCase()) {
-            selectBouquet(card);
-          }
-        });
+    let currentMethod = 'pickup';
+
+    function selectMethod(method) {
+      currentMethod = method;
+      const pickupBtn = document.getElementById('pickupBtn');
+      const deliveryBtn = document.getElementById('deliveryBtn');
+      const deliverySection = document.getElementById('deliverySection');
+      const fulfillmentInput = document.getElementById('fulfillmentMethod');
+      const notice = document.getElementById('fulfillmentNotice');
+
+      if (method === 'pickup') {
+        pickupBtn.classList.add('active');
+        deliveryBtn.classList.remove('active');
+        deliverySection.classList.remove('open');
+        fulfillmentInput.value = 'Pickup';
+        notice.innerHTML = '<p class="font-source text-base text-taupe leading-relaxed"><span class="font-inter text-xs uppercase tracking-widest text-sage mr-2">Pickup</span>Pickup available at no charge. We\'ll coordinate details after you order.</p>';
+
+        // Remove required from delivery fields
+        document.getElementById('recipient').removeAttribute('required');
+        document.getElementById('address').removeAttribute('required');
+        document.getElementById('timeslot').removeAttribute('required');
+      } else {
+        deliveryBtn.classList.add('active');
+        pickupBtn.classList.remove('active');
+        deliverySection.classList.add('open');
+        fulfillmentInput.value = 'Delivery ($10)';
+        notice.innerHTML = '<p class="font-source text-base text-taupe leading-relaxed"><span class="font-inter text-xs uppercase tracking-widest text-sage mr-2">Delivery</span>$10 delivery charge. Mother\'s Day, Sunday May 10 — 8 AM to 2 PM. Limited timeslots available.</p>';
+
+        // Add required to delivery fields
+        document.getElementById('recipient').setAttribute('required', 'true');
+        document.getElementById('address').setAttribute('required', 'true');
+        document.getElementById('timeslot').setAttribute('required', 'true');
       }
-    });
+    }
+
+    // Initialize
+    selectMethod('pickup');
   </script>
 </body>
 </html>
