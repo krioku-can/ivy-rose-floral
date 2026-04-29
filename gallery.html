@@ -21,141 +21,105 @@
       theme: {
         extend: {
           colors: {
-            espresso: '#2C2419',
-            taupe: '#5C4D3C',
-            sage: '#8B9D83',
-            terracotta: '#C17F59',
-            cream: '#F0EBE3',
-            stone: '#D5CFC6',
-            surface: '#FFFFFF',
+            espresso: '#2C2419', taupe: '#5C4D3C', sage: '#8B9D83',
+            terracotta: '#C17F59', cream: '#F0EBE3', stone: '#D5CFC6', surface: '#FFFFFF',
           },
           fontFamily: {
-            'playfair': ['Playfair Display', 'serif'],
-            'source': ['Source Serif Pro', 'serif'],
-            'inter': ['Inter', 'sans-serif'],
-          }
+            playfair: ['Playfair Display', 'serif'],
+            source: ['Source Serif Pro', 'serif'],
+            inter: ['Inter', 'sans-serif'],
+          },
         }
       }
     }
   </script>
   <style>
-    .card-hover {
-      transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+    .skip-link { position: absolute; top: -40px; left: 0; background: #2C2419; color: #F0EBE3; padding: 8px 16px; z-index: 100; transition: top 0.2s; }
+    .skip-link:focus { top: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; animation: none; }
+      .card-hover { transition: none; }
     }
-    .card-hover:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(44, 36, 25, 0.12);
-    }
-    .main-nav {
-      transform: translateX(100%);
-      transition: transform 300ms ease-out;
-    }
-    .main-nav.active {
-      transform: translateX(0);
-    }
-    .nav-backdrop {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 300ms ease-out;
-    }
-    .nav-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .card-hover { transition: transform 200ms ease-out, box-shadow 200ms ease-out; }
+    .card-hover:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(44, 36, 25, 0.12); }
+    .fade-up { animation: fadeUp 600ms ease-out forwards; opacity: 0; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .stagger-1 { animation-delay: 100ms; }
+    .stagger-2 { animation-delay: 200ms; }
+    .stagger-3 { animation-delay: 300ms; }
   </style>
 </head>
 <body class="bg-cream text-espresso font-source antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Header / Navigation -->
+  <!-- Header -->
   <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-stone/40">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
-      <nav class="flex items-center justify-between h-20">
-        <a href="index.html" class="flex items-center gap-3 group">
-          <svg class="w-8 h-8 text-sage group-hover:text-espresso transition-colors duration-200" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 4C16 4 12 8 12 14C12 18 14 22 16 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M16 4C16 4 20 8 20 14C20 18 18 22 16 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M16 24V30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="16" cy="12" r="2" fill="currentColor" opacity="0.3"/>
-          </svg>
-          <span class="font-playfair text-xl font-normal tracking-wide">Ivy & Rose</span>
-        </a>
-
+      <nav class="flex items-center justify-between h-20" aria-label="Main navigation">
+        <a href="index.html" class="font-playfair text-xl font-normal tracking-wide">Ivy & Rose Floral Co.</a>
         <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors duration-200">Home</a>
-          <a href="gallery.html" class="font-inter text-sm uppercase tracking-[0.05em] text-espresso font-medium relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-espresso">Our Bouquets</a>
-          <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors duration-200">Order / Ask</a>
+          <a href="index.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Home</a>
+          <a href="gallery.html" class="font-inter text-sm uppercase tracking-[0.05em] text-espresso font-medium border-b border-espresso pb-0.5">Gallery</a>
+          <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Order</a>
+          <a href="inquiry.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Contact</a>
         </div>
-
-        <a href="order.html" class="hidden md:inline-flex items-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors duration-200">
+        <a href="order.html" class="hidden md:inline-flex items-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors">
           Order Now
         </a>
-
-        <button class="md:hidden menu-toggle p-2" aria-label="Menu" aria-expanded="false">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
       </nav>
     </div>
   </header>
 
-  <!-- Mobile Nav Backdrop -->
-  <div class="nav-backdrop fixed inset-0 z-[60] md:hidden" style="background-color: rgba(44,36,25,0.9);" id="navBackdrop"></div>
-  <!-- Mobile Nav Panel -->
-  <nav class="main-nav md:hidden fixed top-0 right-0 h-full w-72 z-[70] pt-24 px-6 shadow-2xl border-l border-stone/40" style="background-color: #FFFFFF;" id="mobileNavPanel">
-    <div class="flex flex-col gap-1">
-      <a href="index.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Home</a>
-      <a href="gallery.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Our Bouquets</a>
-      <a href="order.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Order Now</a>
-      <a href="order.html?tab=inquiry" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Ask a Question</a>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 md:py-24">
+  <main id="main" class="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 md:py-24">
     <div class="text-center mb-12">
       <span class="font-inter text-sm uppercase tracking-[0.15em] text-sage mb-4 block">Seasonal Selections</span>
       <h1 class="font-playfair text-4xl md:text-5xl font-normal mb-4">Our Bouquets</h1>
-      <p class="text-taupe max-w-2xl mx-auto">Handcrafted arrangements for every occasion. Each bouquet is made with fresh, seasonal blooms and delivered with care.</p>
+      <p class="text-taupe max-w-2xl mx-auto">Handcrafted arrangements for every occasion. Each bouquet is made with fresh, seasonal blooms.</p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Bouquet 1 -->
-      <div class="bg-cream rounded-sm overflow-hidden card-hover">
-        <img src="images/bouquet-1.jpg" alt="Elegant arrangement with white roses, calla lilies, and thistle" class="w-full h-80 object-cover">
+      <!-- Elegant Ivory -->
+      <div class="bg-surface rounded-sm overflow-hidden card-hover fade-up stagger-1">
+        <img src="images/bouquet-1.jpg" alt="Elegant Ivory — white roses, burgundy calla lilies, and Scottish thistle with eucalyptus" class="w-full h-80 object-cover" loading="lazy" decoding="async">
         <div class="p-6">
           <h3 class="font-playfair text-xl mb-2">Elegant Ivory</h3>
           <p class="text-taupe text-sm mb-4">White roses, burgundy calla lilies, and Scottish thistle with eucalyptus.</p>
-          <div class="flex items-center justify-between">
-            <span class="font-inter text-sm uppercase tracking-[0.05em] text-sage">Starting at $50</span>
-            <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-sage hover:text-espresso transition-colors">Order →</a>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-playfair text-2xl text-espresso">$50</span>
           </div>
+          <a href="order.html?bouquet=elegant-ivory" class="block w-full text-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors">
+            Order This Bouquet
+          </a>
         </div>
       </div>
 
-      <!-- Bouquet 2 -->
-      <div class="bg-cream rounded-sm overflow-hidden card-hover">
-        <img src="images/bouquet-2.jpg" alt="Vibrant arrangement with pink roses and orange blooms" class="w-full h-80 object-cover">
+      <!-- Sunset Garden -->
+      <div class="bg-surface rounded-sm overflow-hidden card-hover fade-up stagger-2">
+        <img src="images/bouquet-2.jpg" alt="Sunset Garden — vibrant pink roses, orange alstroemeria, and carnations with lush greenery" class="w-full h-80 object-cover" loading="lazy" decoding="async">
         <div class="p-6">
           <h3 class="font-playfair text-xl mb-2">Sunset Garden</h3>
           <p class="text-taupe text-sm mb-4">Vibrant pink roses, orange alstroemeria, and carnations with lush greenery.</p>
-          <div class="flex items-center justify-between">
-            <span class="font-inter text-sm uppercase tracking-[0.05em] text-sage">Starting at $50</span>
-            <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-sage hover:text-espresso transition-colors">Order →</a>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-playfair text-2xl text-espresso">$50</span>
           </div>
+          <a href="order.html?bouquet=sunset-garden" class="block w-full text-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors">
+            Order This Bouquet
+          </a>
         </div>
       </div>
 
-      <!-- Bouquet 3 -->
-      <div class="bg-cream rounded-sm overflow-hidden card-hover">
-        <img src="images/bouquet-3.jpg" alt="Soft arrangement with white lilies and purple blooms" class="w-full h-80 object-cover">
+      <!-- Lavender Dream -->
+      <div class="bg-surface rounded-sm overflow-hidden card-hover fade-up stagger-3">
+        <img src="images/bouquet-3.jpg" alt="Lavender Dream — white lilies, purple chrysanthemums, and green button mums with fresh foliage" class="w-full h-80 object-cover" loading="lazy" decoding="async">
         <div class="p-6">
           <h3 class="font-playfair text-xl mb-2">Lavender Dream</h3>
           <p class="text-taupe text-sm mb-4">White lilies, purple chrysanthemums, and green button mums with fresh foliage.</p>
-          <div class="flex items-center justify-between">
-            <span class="font-inter text-sm uppercase tracking-[0.05em] text-sage">Starting at $50</span>
-            <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-sage hover:text-espresso transition-colors">Order →</a>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-playfair text-2xl text-espresso">$50</span>
           </div>
+          <a href="order.html?bouquet=lavender-dream" class="block w-full text-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors">
+            Order This Bouquet
+          </a>
         </div>
       </div>
     </div>
@@ -196,51 +160,33 @@
     </div>
 
     <div class="text-center mt-12">
-      <a href="order.html" class="inline-flex items-center px-8 py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors duration-200">
+      <a href="order.html" class="inline-flex items-center px-8 py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors">
         Order Now
       </a>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="py-12 bg-cream border-t border-stone/40">
+  <footer class="bg-espresso text-cream/60 py-12">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
-      <div class="grid md:grid-cols-3 gap-8 mb-8">
-        <div>
-          <a href="index.html" class="flex items-center gap-3 mb-4">
-            <svg class="w-8 h-8 text-sage" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 4C16 4 12 8 12 14C12 18 14 22 16 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M16 4C16 4 20 8 20 14C20 18 18 22 16 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M16 24V30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="16" cy="12" r="2" fill="currentColor" opacity="0.3"/>
-            </svg>
-            <span class="font-playfair text-xl">Ivy & Rose</span>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-center md:text-left">
+          <p class="font-playfair text-lg text-cream mb-1">Ivy & Rose Floral Co.</p>
+          <p class="font-inter text-xs uppercase tracking-[0.15em]">Hamilton, Ohio</p>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" aria-label="Visit Ivy & Rose Floral Co. on Instagram" class="text-cream/60 hover:text-cream transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
-          <p class="text-taupe text-sm">Handcrafted floral arrangements for life's beautiful moments.</p>
-        </div>
-        <div>
-          <h4 class="font-inter text-sm uppercase tracking-[0.05em] text-espresso mb-4">Navigate</h4>
-          <ul class="space-y-2">
-            <li><a href="index.html" class="text-taupe hover:text-espresso transition-colors text-sm">Home</a></li>
-            <li><a href="gallery.html" class="text-taupe hover:text-espresso transition-colors text-sm">Our Bouquets</a></li>
-            <li><a href="order.html" class="text-taupe hover:text-espresso transition-colors text-sm">Order / Ask</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-inter text-sm uppercase tracking-[0.05em] text-espresso mb-4">Contact</h4>
-          <ul class="space-y-2 text-sm text-taupe">
-            <li>Hamilton, Ohio</li>
-            <li>Delivery within 10 miles</li>
-            <li><a href="https://instagram.com/ivyrosefloralco" target="_blank" class="hover:text-espresso transition-colors">Instagram: @ivyrosefloralco</a></li>
-          </ul>
+          <a href="order.html" class="text-cream/60 hover:text-cream transition-colors font-inter text-sm uppercase tracking-[0.05em]">Order</a>
+          <a href="gallery.html" class="text-cream/60 hover:text-cream transition-colors font-inter text-sm uppercase tracking-[0.05em]">Gallery</a>
+          <a href="inquiry.html" class="text-cream/60 hover:text-cream transition-colors font-inter text-sm uppercase tracking-[0.05em]">Contact</a>
         </div>
       </div>
-      <div class="border-t border-stone/40 pt-8 text-center">
-        <p class="text-taupe text-sm">© 2026 Ivy & Rose Floral Co. All rights reserved.</p>
+      <div class="mt-8 pt-8 border-t border-cream/10 text-center">
+        <p class="font-inter text-xs text-cream/40">© 2026 Ivy & Rose Floral Co. All rights reserved.</p>
       </div>
     </div>
   </footer>
-
-  <script src="js/main.js"></script>
 </body>
 </html>

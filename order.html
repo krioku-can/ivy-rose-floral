@@ -3,368 +3,280 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order for Mother's Day — Ivy & Rose Floral Co.</title>
-  <meta name="description" content="Order handcrafted Mother's Day bouquets from Ivy & Rose Floral Co. $50 with free delivery in Hamilton, Ohio.">
-  <meta property="og:title" content="Order Mother's Day Flowers — Ivy & Rose Floral Co.">
-  <meta property="og:description" content="Handcrafted Mother's Day bouquets. $50 + free delivery in Hamilton, Ohio.">
+  <title>Order — Ivy & Rose Floral Co.</title>
+  <meta name="description" content="Order handcrafted bouquets from Ivy & Rose Floral Co. in Hamilton, Ohio. Free delivery within 10 miles.">
+  <meta property="og:title" content="Order Flowers — Ivy & Rose Floral Co.">
+  <meta property="og:description" content="Handcrafted bouquets delivered with care in Hamilton, Ohio.">
   <meta property="og:image" content="https://ivyrosefloralco.com/images/bouquet-1.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://ivyrosefloralco.com/order.html">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🌿</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght+400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            espresso: '#2C2419',
-            taupe: '#5C4D3C',
-            sage: '#8B9D83',
-            terracotta: '#C17F59',
-            cream: '#F0EBE3',
-            stone: '#D5CFC6',
-            surface: '#FFFFFF',
+            espresso: '#2C2419', taupe: '#5C4D3C', sage: '#8B9D83',
+            terracotta: '#C17F59', cream: '#F0EBE3', stone: '#D5CFC6', surface: '#FFFFFF',
           },
           fontFamily: {
-            'playfair': ['Playfair Display', 'serif'],
-            'source': ['Source Serif Pro', 'serif'],
-            'inter': ['Inter', 'sans-serif'],
+            playfair: ['Playfair Display', 'serif'],
+            source: ['Source Serif Pro', 'serif'],
+            inter: ['Inter', 'sans-serif'],
           },
         }
       }
     }
   </script>
   <style>
+    .skip-link { position: absolute; top: -40px; left: 0; background: #2C2419; color: #F0EBE3; padding: 8px 16px; z-index: 100; transition: top 0.2s; }
+    .skip-link:focus { top: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; animation: none; }
+      .stagger-1, .stagger-2, .stagger-3 { animation-delay: 0ms; }
+      .btn-primary { transition: none; }
+    }
     .form-field {
-      background-color: #FFFFFF;
-      border: 1px solid #D5CFC6;
-      border-radius: 4px;
+      background-color: #FFFFFF; border: 1px solid #D5CFC6; border-radius: 4px;
       transition: border-color 200ms ease, box-shadow 200ms ease;
     }
     .form-field:focus {
-      outline: none;
-      border-color: #8B9D83;
+      outline: none; border-color: #8B9D83;
       box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.15);
     }
-    .form-field::placeholder {
-      color: #5C4D3C;
-      opacity: 0.5;
-    }
-    .btn-primary {
-      background-color: #2C2419;
-      color: #F0EBE3;
-      transition: background-color 200ms ease, transform 200ms ease;
-    }
-    .btn-primary:hover {
-      background-color: #3d3224;
-      transform: translateY(-1px);
-    }
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-    .fade-up {
-      animation: fadeUp 600ms ease-out forwards;
-    }
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    .form-field::placeholder { color: #5C4D3C; opacity: 0.5; }
     select.form-field {
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C4D3C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      padding-right: 44px;
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px;
     }
-    /* Mobile nav */
-    .main-nav {
-      transform: translateX(100%);
-      transition: transform 300ms ease-out;
+    .bouquet-card {
+      border: 2px solid #D5CFC6; border-radius: 4px; transition: all 200ms ease; cursor: pointer;
     }
-    .main-nav.active {
-      transform: translateX(0);
+    .bouquet-card:hover { border-color: #8B9D83; }
+    .bouquet-card.selected {
+      border-color: #8B9D83; box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.25);
     }
-    .nav-backdrop {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 300ms ease-out;
-    }
-    .nav-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .bouquet-card:focus { outline: none; border-color: #8B9D83; box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.25); }
+    .fade-up { animation: fadeUp 600ms ease-out forwards; opacity: 0; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .stagger-1 { animation-delay: 100ms; }
+    .stagger-2 { animation-delay: 200ms; }
+    .stagger-3 { animation-delay: 300ms; }
   </style>
 </head>
-<body class="bg-cream text-espresso min-h-screen">
+<body class="bg-cream text-espresso font-source antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Header / Nav -->
-  <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-stone/40">
-    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
-      <nav class="flex items-center justify-between h-20">
-        <a href="index.html" class="flex items-center gap-3 group">
-          <svg class="w-8 h-8 text-sage group-hover:text-espresso transition-colors duration-200" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 4C16 4 12 8 12 14C12 18 14 22 16 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M16 4C16 4 20 8 20 14C20 18 18 22 16 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M16 24V30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="16" cy="12" r="2" fill="currentColor" opacity="0.3"/>
-          </svg>
-          <span class="font-playfair text-xl font-normal tracking-wide">Ivy & Rose</span>
-        </a>
+  <!-- Urgency Banner -->
+  <div class="bg-terracotta text-cream text-center py-3 px-4">
+    <p class="font-inter text-sm font-medium">
+      ⏰ Order by May 8 for guaranteed Mother's Day delivery
+    </p>
+  </div>
 
-        <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors duration-200">Home</a>
-          <a href="gallery.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors duration-200">Our Bouquets</a>
-          <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-espresso font-medium relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-espresso">Order / Ask</a>
-        </div>
-
-        <button class="md:hidden menu-toggle p-2" aria-label="Menu" aria-expanded="false">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </nav>
+  <!-- Header -->
+  <header class="border-b border-stone/40">
+    <div class="max-w-2xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="index.html" class="font-playfair text-xl tracking-wide hover:text-sage transition-colors">
+        Ivy & Rose Floral Co.
+      </a>
+      <a href="index.html" class="font-inter text-xs uppercase tracking-widest text-taupe hover:text-espresso transition-colors">
+        ← Back
+      </a>
     </div>
   </header>
 
-  <!-- Mobile Nav Backdrop -->
-  <div class="nav-backdrop fixed inset-0 z-[60] md:hidden" style="background-color: rgba(44,36,25,0.9);" id="navBackdrop"></div>
-  <!-- Mobile Nav Panel -->
-  <nav class="main-nav md:hidden fixed top-0 right-0 h-full w-72 z-[70] pt-24 px-6 shadow-2xl border-l border-stone/40" style="background-color: #FFFFFF;" id="mobileNavPanel">
-    <div class="flex flex-col gap-1">
-      <a href="index.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Home</a>
-      <a href="gallery.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Our Bouquets</a>
-      <a href="order.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Order Now</a>
-      <a href="order.html?tab=inquiry" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Ask a Question</a>
-    </div>
-  </nav>
-
   <!-- Main Content -->
-  <main class="max-w-2xl mx-auto px-6 py-16 md:py-24">
-
-    <!-- Page Title -->
-    <div class="text-center mb-10 fade-up">
-      <h1 class="font-playfair text-4xl md:text-5xl font-normal leading-tight text-espresso mb-4">
-        Order for Mother's Day
-      </h1>
-      <p class="font-source text-lg text-taupe leading-relaxed max-w-md mx-auto">
-        A bouquet as thoughtful as your love. Let us craft something beautiful for the one who raised you.
-      </p>
+  <main id="main" class="max-w-2xl mx-auto px-6 py-10 md:py-14">
+    <div class="text-center mb-8 fade-up">
+      <h1 class="font-playfair text-4xl md:text-5xl font-normal leading-tight mb-3">Place Your Order</h1>
+      <p class="text-taupe text-lg">Handcrafted bouquets + free delivery within 10 miles</p>
     </div>
 
-    <!-- Deadline Banner -->
-    <div class="mb-12 bg-terracotta/10 border border-highlight/20 rounded px-6 py-4 text-center fade-up" style="animation-delay: 100ms;">
-      <p class="font-inter text-xs uppercase tracking-widest text-terracotta">
-        Order by May 8, 2026 for guaranteed Mother's Day delivery
-      </p>
+    <!-- Instagram Link -->
+    <div class="mb-8 text-center fade-up stagger-1">
+      <p class="text-sm text-taupe mb-2">Questions? DM us on Instagram</p>
+      <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso border border-espresso px-5 py-2.5 rounded-sm hover:bg-espresso hover:text-cream transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        @ivyrosefloralco
+      </a>
     </div>
 
     <!-- Order Form -->
-    <form
-      name="mothers-day-order"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      class="fade-up"
-      style="animation-delay: 200ms;"
-      id="orderForm"
-    >
-
+    <form name="ivy-rose-order" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field" class="fade-up stagger-2" id="orderForm">
       <!-- Honeypot -->
-      <p class="hidden">
-        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-      </p>
+      <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+
+      <!-- Bouquet Selection -->
+      <div class="mb-10">
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Choose Your Bouquet</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- Elegant Ivory -->
+          <label class="bouquet-card block cursor-pointer" onclick="selectBouquet(this)" tabindex="0" role="radio" aria-checked="false">
+            <input type="radio" name="bouquet" value="Elegant Ivory" class="hidden">
+            <div class="relative">
+              <img src="images/bouquet-1.jpg" alt="Elegant Ivory bouquet" class="w-full h-48 object-cover" loading="lazy" decoding="async">
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-playfair text-lg">Elegant Ivory</span>
+                <span class="font-playfair text-xl font-bold">$50</span>
+              </div>
+              <p class="text-taupe text-sm">White roses, burgundy calla lilies, and Scottish thistle with eucalyptus.</p>
+            </div>
+          </label>
+
+          <!-- Sunset Garden -->
+          <label class="bouquet-card block cursor-pointer" onclick="selectBouquet(this)" tabindex="0" role="radio" aria-checked="false">
+            <input type="radio" name="bouquet" value="Sunset Garden" class="hidden">
+            <div class="relative">
+              <img src="images/bouquet-2.jpg" alt="Sunset Garden bouquet" class="w-full h-48 object-cover" loading="lazy" decoding="async">
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-playfair text-lg">Sunset Garden</span>
+                <span class="font-playfair text-xl font-bold">$50</span>
+              </div>
+              <p class="text-taupe text-sm">Vibrant pink roses, orange alstroemeria, and carnations with lush greenery.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Size Selection -->
+      <div class="mb-10">
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Select Size</h2>
+        <select id="sizeSelect" name="bouquet_size" required class="form-field w-full px-4 py-3 text-base cursor-pointer">
+          <option value="" disabled selected>Choose your size</option>
+          <option value="Mini (5 Stems) - $15">Mini (5 Stems) — $15</option>
+          <option value="Small (8 Stems) - $25">Small (8 Stems) — $25</option>
+          <option value="Medium (17 Stems) - $50" selected>Medium (17 Stems) — $50</option>
+          <option value="Large (27 Stems) - $75">Large (27 Stems) — $75</option>
+          <option value="X-Large (45 Stems) - $100">X-Large (45 Stems) — $100</option>
+          <option value="Designer's Choice (32 Stems) - $85">Designer's Choice (32 Stems) — $85</option>
+          <option value="Custom Creation - Starting at $50">Custom Creation — Starting at $50</option>
+        </select>
+      </div>
 
       <!-- Your Info -->
-      <div class="mb-14">
-        <h2 class="font-playfair text-xl font-normal text-espresso mb-6 pb-2 border-b border-stone">From You</h2>
-
-        <div class="space-y-6">
+      <div class="mb-10">
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Your Info</h2>
+        <div class="space-y-4">
           <div>
-            <label for="yourName" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Name <span class="text-terracotta">*</span></label>
-            <input type="text" id="yourName" name="your_name" required class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="Jane Doe">
+            <label for="name" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Name <span aria-label="required">*</span></label>
+            <input type="text" id="name" name="your_name" required autocomplete="name" aria-required="true" class="form-field w-full px-4 py-3 text-base" placeholder="Your full name">
           </div>
-
           <div>
-            <label for="yourEmail" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Email <span class="text-terracotta">*</span></label>
-            <input type="email" id="yourEmail" name="your_email" required class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="jane@example.com">
+            <label for="phone" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Phone <span aria-label="required">*</span></label>
+            <input type="tel" id="phone" name="your_phone" required autocomplete="tel" aria-required="true" class="form-field w-full px-4 py-3 text-base" placeholder="(555) 123-4567">
           </div>
-
           <div>
-            <label for="yourPhone" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Phone <span class="text-terracotta">*</span></label>
-            <input type="tel" id="yourPhone" name="your_phone" required class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="(555) 123-4567">
+            <label for="email" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Email <span aria-label="required">*</span></label>
+            <input type="email" id="email" name="your_email" required autocomplete="email" aria-required="true" class="form-field w-full px-4 py-3 text-base" placeholder="you@example.com">
           </div>
         </div>
       </div>
 
-      <!-- Recipient Info -->
-      <div class="mb-14">
-        <h2 class="font-playfair text-xl font-normal text-espresso mb-6 pb-2 border-b border-stone">To Recipient</h2>
-
-        <div class="space-y-6">
+      <!-- Delivery Info -->
+      <div class="mb-10">
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Delivery Info</h2>
+        <div class="space-y-4">
           <div>
-            <label for="recipientName" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Recipient Name <span class="text-terracotta">*</span></label>
-            <input type="text" id="recipientName" name="recipient_name" required class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="Mom">
+            <label for="recipient" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Recipient Name <span aria-label="required">*</span></label>
+            <input type="text" id="recipient" name="recipient_name" required autocomplete="name" aria-required="true" class="form-field w-full px-4 py-3 text-base" placeholder="Mom, Grandma, etc.">
           </div>
-
           <div>
-            <label for="recipientAddress" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Recipient Address <span class="text-terracotta">*</span></label>
-            <textarea id="recipientAddress" name="recipient_address" rows="3" required class="form-field w-full px-4 py-3 font-source text-base text-espresso resize-y" placeholder="123 Maple Lane, Hamilton, OH 45013"></textarea>
+            <label for="address" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Delivery Address <span aria-label="required">*</span></label>
+            <textarea id="address" name="recipient_address" rows="2" required autocomplete="street-address" aria-required="true" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="123 Maple Lane, Hamilton, OH 45013"></textarea>
+          </div>
+          <div>
+            <label for="date" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Delivery Date <span aria-label="required">*</span></label>
+            <select id="date" name="delivery_date" required class="form-field w-full px-4 py-3 text-base cursor-pointer">
+              <option value="" disabled selected>Choose a date</option>
+              <option value="May 9, 2026">Saturday, May 9</option>
+              <option value="May 10, 2026">Sunday, May 10</option>
+              <option value="May 11, 2026">Monday, May 11 (Mother's Day)</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <!-- Order Details -->
-      <div class="mb-14">
-        <h2 class="font-playfair text-xl font-normal text-espresso mb-6 pb-2 border-b border-stone">Order Details</h2>
+      <!-- Card Message -->
+      <div class="mb-10">
+        <h2 class="font-playfair text-xl mb-5 pb-2 border-b border-stone">Personal Touch</h2>
+        <label for="message" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Card Message</label>
+        <textarea id="message" name="custom_message" rows="3" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="Happy Mother's Day! Love you."></textarea>
+      </div>
 
-        <div class="space-y-6">
-          <div>
-            <label for="deliveryDate" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Delivery Date <span class="text-terracotta">*</span></label>
-            <select id="deliveryDate" name="delivery_date" required class="form-field w-full px-4 py-3 font-source text-base text-espresso cursor-pointer">
-              <option value="" disabled selected>Select a delivery date</option>
-              <option value="May 9, 2026">Saturday, May 9, 2026</option>
-              <option value="May 10, 2026">Sunday, May 10, 2026</option>
-              <option value="May 11, 2026">Monday, May 11, 2026</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="bouquet" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Bouquet Selection <span class="text-terracotta">*</span></label>
-            <select id="bouquet" name="bouquet" required class="form-field w-full px-4 py-3 font-source text-base text-espresso cursor-pointer">
-              <option value="" disabled selected>Choose your bouquet</option>
-              <option value="Mini (5 Stems) - $15">Mini (5 Stems) — $15</option>
-              <option value="Small (8 Stems) - $25">Small (8 Stems) — $25</option>
-              <option value="Medium (17 Stems) - $50">Medium (17 Stems) — $50</option>
-              <option value="Large (27 Stems) - $75">Large (27 Stems) — $75</option>
-              <option value="X-Large (45 Stems) - $100">X-Large (45 Stems) — $100</option>
-              <option value="Designer's Choice (32 Stems) - $85">Designer's Choice (32 Stems) — $85</option>
-              <option value="Custom Creation - Starting at $50">Custom Creation — Starting at $50</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="customMessage" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Custom Message</label>
-            <textarea id="customMessage" name="custom_message" rows="4" class="form-field w-full px-4 py-3 font-source text-base text-espresso resize-y" placeholder="Happy Mother's Day, Mom! Love you always."></textarea>
-          </div>
-
-          <div>
-            <label for="specialInstructions" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Special Instructions</label>
-            <textarea id="specialInstructions" name="special_instructions" rows="3" class="form-field w-full px-4 py-3 font-source text-base text-espresso resize-y" placeholder="Leave at front door"></textarea>
-          </div>
-        </div>
+      <!-- Special Instructions -->
+      <div class="mb-10">
+        <label for="instructions" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-1.5">Special Instructions</label>
+        <textarea id="instructions" name="special_instructions" rows="2" class="form-field w-full px-4 py-3 text-base resize-y" placeholder="Leave at front door, etc."></textarea>
       </div>
 
       <!-- Delivery Notice -->
-      <div class="mb-10 bg-sage/10 border border-accent/20 rounded px-5 py-4">
+      <div class="mb-8 bg-sage/10 border border-sage/20 rounded px-5 py-4">
         <p class="font-source text-base text-taupe leading-relaxed">
           <span class="font-inter text-xs uppercase tracking-widest text-sage mr-2">Delivery</span>
-          Delivery within 10 miles of Hamilton. Free pickup available.
+          Free delivery within 10 miles of Hamilton. Pickup also available.
         </p>
       </div>
 
-      <!-- Submit Button -->
-      <button type="submit" class="btn-primary w-full py-4 rounded-sm font-inter text-xs uppercase tracking-widest cursor-pointer">
+      <!-- Submit -->
+      <button type="submit" class="w-full py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-widest rounded-sm hover:bg-taupe transition-colors duration-200 cursor-pointer">
         Place Order
       </button>
     </form>
 
-    <!-- Success Message (hidden by default) -->
-    <div id="successMessage" class="hidden text-center py-16 fade-up">
-      <div class="mb-6 flex justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8B9D83" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-80"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-      </div>
-      <h2 class="font-playfair text-3xl font-normal text-espresso mb-4">Thank You!</h2>
-      <p class="font-source text-lg text-taupe leading-relaxed max-w-md mx-auto">
-        We'll confirm your order within 24 hours. Your mom is going to love it.
-      </p>
-      <a href="index.html" class="inline-block mt-8 font-inter text-sm uppercase tracking-widest text-taupe hover:text-espresso transition-colors duration-200 border-b border-transparent hover:border-primary pb-0.5">
-        Back to Home
+    <!-- Instagram -->
+    <div class="mt-10 pt-8 border-t border-stone text-center">
+      <p class="text-taupe text-sm mb-2">See more arrangements</p>
+      <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso hover:text-sage transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        @ivyrosefloralco
       </a>
     </div>
-
-    <!-- Contact -->
-    <div class="mt-16 pt-10 border-t border-stone text-center fade-up" style="animation-delay: 300ms;">
-      <p class="font-source text-base text-taupe">
-        Questions? DM us on Instagram at
-        <a href="https://instagram.com/ivyrosefloralco" target="_blank" class="text-espresso underline underline-offset-4 decoration-muted hover:decoration-accent transition-colors duration-200">@ivyrosefloralco</a>
-      </p>
-    </div>
-
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-stone mt-16">
-    <div class="max-w-5xl mx-auto px-6 py-8 text-center">
-      <p class="font-inter text-xs uppercase tracking-widest text-taupe">
-        Ivy & Rose Floral Co. — Hamilton, Ohio
-      </p>
-      <p class="mt-2 text-sm text-taupe">
-        Instagram: <a href="https://instagram.com/ivyrosefloralco" target="_blank" class="text-espresso hover:underline">@ivyrosefloralco</a> | Delivery within 10 miles of Hamilton
-      </p>
+  <footer class="border-t border-stone py-8">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <p class="font-inter text-xs uppercase tracking-widest text-taupe">Ivy & Rose Floral Co. — Hamilton, Ohio</p>
     </div>
   </footer>
 
   <script>
-    // Mobile nav
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.getElementById('mobileNavPanel');
-    const navBackdrop = document.getElementById('navBackdrop');
-
-    function toggleNav() {
-      const isOpen = mainNav.classList.toggle('active');
-      navBackdrop.classList.toggle('active');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+    function selectBouquet(card) {
+      document.querySelectorAll('.bouquet-card').forEach(c => {
+        c.classList.remove('selected');
+        c.setAttribute('aria-checked', 'false');
+      });
+      card.classList.add('selected');
+      card.setAttribute('aria-checked', 'true');
+      card.querySelector('input[type="radio"]').checked = true;
     }
-
-    menuToggle.addEventListener('click', toggleNav);
-    navBackdrop.addEventListener('click', toggleNav);
-
-    document.querySelectorAll('#mobileNavPanel a').forEach(link => {
-      link.addEventListener('click', () => {
-        mainNav.classList.remove('active');
-        navBackdrop.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+    document.querySelectorAll('.bouquet-card').forEach(card => {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectBouquet(card); }
       });
     });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-        toggleNav();
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const bouquetParam = params.get('bouquet');
+      if (bouquetParam) {
+        document.querySelectorAll('.bouquet-card').forEach(card => {
+          const input = card.querySelector('input[type="radio"]');
+          if (input && input.value.toLowerCase().replace(/\s+/g, '-') === bouquetParam.toLowerCase()) {
+            selectBouquet(card);
+          }
+        });
       }
-    });
-
-    // Netlify form success handling
-    const orderForm = document.getElementById('orderForm');
-    const successMessage = document.getElementById('successMessage');
-
-    // Check if we're returning from a successful Netlify form submission
-    if (window.location.search.includes('success=true') || window.location.hash === '#success') {
-      orderForm.classList.add('hidden');
-      successMessage.classList.remove('hidden');
-    }
-
-    // Intercept form submission for SPA-like success state
-    orderForm.addEventListener('submit', function(e) {
-      // If we're viewing via file:// or a non-Netlify host, prevent default and show success
-      if (window.location.protocol === 'file:' || !document.querySelector('form').action) {
-        e.preventDefault();
-        orderForm.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      // Otherwise let Netlify handle it; it will redirect back with success param
     });
   </script>
 </body>
