@@ -4,124 +4,231 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ask a Question — Ivy & Rose Floral Co.</title>
-  <meta name="description" content="Have a question about our flowers? Send us a message — Ivy & Rose Floral Co. in Hamilton, Ohio.">
+  <meta name="description" content="Have a question about Mother's Day flowers? Send us a message.">
   <meta property="og:title" content="Ask a Question — Ivy & Rose Floral Co.">
-  <meta property="og:description" content="Have a question about our flowers? Send us a message.">
+  <meta property="og:description" content="Have a question about Mother's Day flowers? Send us a message.">
+  <meta property="og:image" content="https://ivyrosefloralco.com/images/bouquet-mothers-day.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://ivyrosefloralco.com/inquiry.html">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🌿</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            espresso: '#2C2419', taupe: '#5C4D3C', sage: '#8B9D83',
-            terracotta: '#C17F59', cream: '#F0EBE3', stone: '#D5CFC6', surface: '#FFFFFF',
-          },
-          fontFamily: {
-            playfair: ['Playfair Display', 'serif'],
-            source: ['Source Serif Pro', 'serif'],
-            inter: ['Inter', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    .skip-link { position: absolute; top: -40px; left: 0; background: #2C2419; color: #F0EBE3; padding: 8px 16px; z-index: 100; transition: top 0.2s; }
-    .skip-link:focus { top: 0; }
-    @media (prefers-reduced-motion: reduce) {
-      .fade-up { opacity: 1; animation: none; }
-    }
-    .form-field {
-      background-color: #FFFFFF; border: 1px solid #D5CFC6; border-radius: 4px;
-      transition: border-color 200ms ease, box-shadow 200ms ease;
-    }
-    .form-field:focus {
-      outline: none; border-color: #8B9D83;
-      box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.15);
-    }
-    .form-field::placeholder { color: #5C4D3C; opacity: 0.5; }
-    .fade-up { animation: fadeUp 600ms ease-out forwards; opacity: 0; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-cream text-espresso font-source antialiased">
-  <a href="#main" class="skip-link">Skip to content</a>
+<body class="font-source min-h-screen" style="display: flex; flex-direction: column;">
 
   <!-- Header -->
-  <header class="border-b border-stone/40">
-    <div class="max-w-2xl mx-auto px-6 py-5 flex items-center justify-between">
-      <a href="index.html" class="font-playfair text-xl tracking-wide hover:text-sage transition-colors">
-        Ivy & Rose Floral Co.
-      </a>
-      <a href="index.html" class="font-inter text-xs uppercase tracking-widest text-taupe hover:text-espresso transition-colors">
-        ← Back
-      </a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">Ivy &amp; Rose Floral Co.</a>
+      <div class="nav-desktop">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="order.html" class="nav-link">Order</a>
+          <a href="gallery.html" class="nav-link">Gallery</a>
+          <a href="inquiry.html" class="nav-link" aria-current="page">Contact</a>
+        </nav>
+      </div>
+      <button class="menu-toggle md:hidden" aria-label="Menu" aria-expanded="false" aria-controls="mobileNavPanel">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
   </header>
 
+  <!-- Mobile Nav Backdrop -->
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <!-- Mobile Nav Panel -->
+  <nav class="main-nav" id="mobileNavPanel" aria-label="Mobile navigation">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="order.html" class="nav-link">Order</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="inquiry.html" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
   <!-- Main Content -->
-  <main id="main" class="max-w-2xl mx-auto px-6 py-16 md:py-24">
+  <main class="flex-1 container-narrow py-16 md:py-24">
+
+    <!-- Page Title -->
     <div class="text-center mb-12 fade-up">
-      <h1 class="font-playfair text-4xl md:text-5xl font-normal leading-tight mb-4">Have a Question?</h1>
+      <h1 class="font-playfair text-4xl md:text-5xl font-normal leading-tight mb-4">
+        Have a Question?
+      </h1>
       <p class="font-source text-lg text-taupe leading-relaxed max-w-md mx-auto">
         We're here to help. Send us a message and we'll get back to you as soon as possible.
       </p>
     </div>
 
-    <!-- Inquiry Form -->
-    <form name="ivy-rose-inquiry" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field" class="space-y-8 fade-up" style="animation-delay: 100ms;">
-      <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+    <!-- Quick FAQ -->
+    <div class="mb-12 p-6 bg-surface border rounded-sm" style="border-color: var(--color-stone);">
+      <h2 class="font-inter text-xs uppercase tracking-widest text-taupe mb-4">Quick Answers</h2>
+      <div class="space-y-3">
+        <div>
+          <p class="font-inter text-sm font-medium text-espresso">How much is delivery?</p>
+          <p class="text-taupe text-sm">$10 delivery charge. Pickup is available at no charge.</p>
+        </div>
+        <div>
+          <p class="font-inter text-sm font-medium text-espresso">How do I pay?</p>
+          <p class="text-taupe text-sm">Payment is collected on delivery — cash or Venmo.</p>
+        </div>
+        <div>
+          <p class="font-inter text-sm font-medium text-espresso">When should I order?</p>
+          <p class="text-taupe text-sm">Order by May 7, 2026 for guaranteed Mother's Day delivery. Limited timeslots available.</p>
+        </div>
+        <div>
+          <p class="font-inter text-sm font-medium text-espresso">What sizes are available?</p>
+          <p class="text-taupe text-sm">Mini (5 stems, $15) through X-Large (45 stems, $100). Designer's Choice ($85) and Mother's Day Special (23 stems, $65) also available.</p>
+        </div>
+      </div>
+    </div>
 
-      <div>
-        <label for="name" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Name <span class="text-terracotta">*</span></label>
-        <input type="text" id="name" name="name" required autocomplete="name" aria-required="true" class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="Jane Doe">
+    <!-- Inquiry Form -->
+    <iframe name="hiddenInquiryFrame" class="hidden" title="Inquiry submission" aria-hidden="true"></iframe>
+    <form
+      name="ivy-rose-inquiry"
+      method="POST"
+      action="https://docs.google.com/forms/d/e/1FAIpQLScorKcFPgaSyxseFF-T6rNP4HmIBYdrcUmI22VYte22LYzrqA/formResponse"
+      target="hiddenInquiryFrame"
+      class="space-y-8 fade-up"
+      style="animation-delay: 100ms;"
+      id="inquiryForm"
+      data-validate
+    >
+
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name" class="form-label">
+          Your Name <span class="required">*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="entry.874960215"
+          required
+          autocomplete="name"
+          aria-required="true"
+          class="form-field"
+          placeholder="Jane Doe"
+        >
       </div>
-      <div>
-        <label for="email" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Email <span class="text-terracotta">*</span></label>
-        <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="jane@example.com">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email" class="form-label">
+          Your Email <span class="required">*</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="entry.1278823486"
+          required
+          autocomplete="email"
+          aria-required="true"
+          class="form-field"
+          placeholder="jane@example.com"
+        >
       </div>
-      <div>
-        <label for="phone" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Phone</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel" class="form-field w-full px-4 py-3 font-source text-base text-espresso" placeholder="(555) 123-4567">
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone" class="form-label">
+          Your Phone
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="entry.1024575775"
+          autocomplete="tel"
+          class="form-field"
+          placeholder="(555) 123-4567"
+        >
       </div>
-      <div>
-        <label for="question" class="block font-inter text-xs uppercase tracking-widest text-taupe mb-2">Your Question <span class="text-terracotta">*</span></label>
-        <textarea id="question" name="question" rows="5" required aria-required="true" class="form-field w-full px-4 py-3 font-source text-base text-espresso resize-y" placeholder="What would you like to know?"></textarea>
+
+      <!-- Question -->
+      <div class="form-group">
+        <label for="question" class="form-label">
+          Your Question <span class="required">*</span>
+        </label>
+        <textarea
+          id="question"
+          name="entry.532543534"
+          rows="5"
+          required
+          aria-required="true"
+          class="form-field"
+          placeholder="What would you like to know?"
+        ></textarea>
       </div>
+
+      <!-- Submit -->
       <div class="pt-4">
-        <button type="submit" class="w-full bg-espresso text-cream py-4 px-8 font-inter text-sm uppercase tracking-widest rounded-sm hover:bg-taupe transition-colors cursor-pointer">
+        <button
+          type="submit"
+          id="submitInquiryButton"
+          class="btn btn-primary btn-full"
+          style="padding: 16px;"
+        >
           Send Message
         </button>
+        <p class="form-hint text-center mt-3">Your message will be securely captured and Ivy & Rose will follow up soon.</p>
       </div>
     </form>
 
     <!-- Instagram CTA -->
     <div class="mt-16 text-center fade-up" style="animation-delay: 200ms;">
       <p class="text-taupe mb-4">Or DM us on Instagram for a faster response</p>
-      <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-inter text-sm uppercase tracking-widest text-espresso border border-espresso px-6 py-3 rounded-sm hover:bg-espresso hover:text-cream transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      <a
+        href="https://instagram.com/ivyrosefloralco"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-secondary"
+        style="padding: 12px 24px;"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
         @ivyrosefloralco
       </a>
     </div>
+
   </main>
 
   <!-- Footer -->
-  <footer class="py-12 bg-espresso text-cream/60">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-      <a href="index.html" class="font-playfair text-xl text-cream hover:text-cream/80 transition-colors inline-block mb-4">Ivy & Rose Floral Co.</a>
-      <p class="font-inter text-xs uppercase tracking-widest">Hamilton, Ohio</p>
-      <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="text-cream/60 hover:text-cream transition-colors text-sm inline-flex items-center gap-1 mt-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        @ivyrosefloralco
-      </a>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-brand-name">Ivy &amp; Rose Floral Co.</p>
+          <p class="footer-brand-location">Hamilton, Ohio</p>
+        </div>
+        <div class="footer-social">
+          <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" aria-label="Visit Ivy &amp; Rose Floral Co. on Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Ivy &amp; Rose Floral Co. All rights reserved.</p>
+      </div>
     </div>
   </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('inquiryForm').addEventListener('submit', function () {
+      const submitButton = document.getElementById('submitInquiryButton');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending Message...';
+
+      setTimeout(() => {
+        window.location.href = '/success.html?submitted=inquiry';
+      }, 1200);
+    });
+  </script>
 </body>
 </html>

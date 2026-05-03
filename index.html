@@ -7,7 +7,7 @@
     <meta name="description" content="Ivy & Rose Floral Co. creates handcrafted, seasonal arrangements for weddings, events, and everyday moments. Based in Hamilton, Ohio.">
     <meta property="og:title" content="Ivy & Rose Floral Co. — Handcrafted Arrangements">
     <meta property="og:description" content="Handcrafted, seasonal arrangements for weddings, events, and everyday moments. Based in Hamilton, Ohio.">
-    <meta property="og:image" content="https://ivyrosefloralco.com/images/bouquet-mothers-day.jpg">
+    <meta property="og:image" content="https://ivyrosefloralco.com/images/bouquet-new-1.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://ivyrosefloralco.com/">
@@ -31,126 +31,73 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        espresso: '#2C2419',
-                        taupe: '#5C4D3C',
-                        sage: '#8B9D83',
-                        terracotta: '#C17F59',
-                        cream: '#F0EBE3',
-                        stone: '#D5CFC6',
-                        surface: '#FFFFFF',
-                    },
-                    fontFamily: {
-                        'playfair': ['Playfair Display', 'serif'],
-                        'source': ['Source Serif Pro', 'serif'],
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style>
-        .skip-link { position: absolute; top: -40px; left: 0; background: #2C2419; color: #F0EBE3; padding: 8px 16px; z-index: 100; transition: top 0.2s; }
-        .skip-link:focus { top: 0; }
-        @media (prefers-reduced-motion: reduce) {
-            .fade-up { opacity: 1; animation: none; }
-            .stagger-1, .stagger-2, .stagger-3, .stagger-4 { animation-delay: 0ms; }
-            .card-hover, .btn-primary { transition: none; }
-        }
-        .fade-up { animation: fadeUp 600ms ease-out forwards; opacity: 0; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .stagger-1 { animation-delay: 100ms; }
-        .stagger-2 { animation-delay: 200ms; }
-        .stagger-3 { animation-delay: 300ms; }
-        .stagger-4 { animation-delay: 400ms; }
-        .card-hover { transition: transform 200ms ease-out, box-shadow 200ms ease-out; }
-        .card-hover:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(44, 36, 25, 0.12); }
-        .btn-primary { transition: background-color 200ms ease, transform 200ms ease; }
-        .btn-primary:hover { transform: translateY(-1px); }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-cream text-espresso font-source antialiased">
+<body class="font-source">
     <a href="#main" class="skip-link">Skip to content</a>
 
     <!-- Urgency Banner -->
-    <div class="bg-terracotta text-cream text-center py-3 px-4">
-        <p class="font-inter text-sm font-medium">
-            🌸 Order by May 7 for guaranteed Mother's Day delivery
-        </p>
+    <div class="urgency-banner">
+        <p>🌸 Order by May 7 for guaranteed Mother's Day delivery</p>
     </div>
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-stone/40">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
-            <nav class="flex items-center justify-between h-20" aria-label="Main navigation">
-                <a href="index.html" class="font-playfair text-xl font-normal tracking-wide" aria-current="page">Ivy & Rose Floral Co.</a>
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="order.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Order</a>
-                    <a href="gallery.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Gallery</a>
-                    <a href="inquiry.html" class="font-inter text-sm uppercase tracking-[0.05em] text-taupe hover:text-espresso transition-colors">Contact</a>
-                </div>
-                <a href="order.html" class="hidden md:inline-flex items-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm btn-primary hover:bg-taupe transition-colors">
-                    Order Now
-                </a>
-                <!-- Mobile menu -->
-                <button class="md:hidden menu-toggle p-2" aria-label="Menu" aria-expanded="false">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </nav>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo" aria-current="page">Ivy &amp; Rose Floral Co.</a>
+            <div class="nav-desktop">
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a href="order.html" class="nav-link">Order</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="inquiry.html" class="nav-link">Contact</a>
+                </nav>
+            </div>
+            <button class="menu-toggle md:hidden" aria-label="Menu" aria-expanded="false" aria-controls="mobileNavPanel">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
     </header>
 
     <!-- Mobile Nav Backdrop -->
-    <div class="nav-backdrop fixed inset-0 z-[60] md:hidden" style="background-color: rgba(44,36,25,0.9); opacity: 0; pointer-events: none; transition: opacity 300ms ease-out;" id="navBackdrop"></div>
+    <div class="nav-backdrop" id="navBackdrop"></div>
     <!-- Mobile Nav Panel -->
-    <nav class="fixed top-0 right-0 h-full w-72 z-[70] pt-24 px-6 shadow-2xl border-l border-stone/40 md:hidden" style="background-color: #FFFFFF; transform: translateX(100%); transition: transform 300ms ease-out;" id="mobileNavPanel">
-        <div class="flex flex-col gap-1">
-            <a href="index.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Home</a>
-            <a href="order.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Order</a>
-            <a href="gallery.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Gallery</a>
-            <a href="inquiry.html" class="font-inter text-base uppercase tracking-[0.05em] text-espresso font-medium py-3 px-2 rounded-sm hover:bg-cream/60 transition-colors">Contact</a>
+    <nav class="main-nav" id="mobileNavPanel" aria-label="Mobile navigation">
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="order.html" class="nav-link">Order</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="inquiry.html" class="nav-link">Contact</a>
         </div>
     </nav>
 
     <main id="main">
     <!-- Hero Section -->
-    <section class="relative overflow-hidden">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 md:py-24 lg:py-32">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div class="order-2 lg:order-1">
-                    <span class="font-inter text-sm uppercase tracking-[0.15em] text-sage mb-6 block fade-up">Hamilton, Ohio</span>
-                    <h1 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] mb-6 fade-up stagger-1">
-                        Handcrafted Arrangements for Moments That Matter
-                    </h1>
-                    <p class="text-lg md:text-xl text-taupe leading-relaxed mb-8 max-w-lg fade-up stagger-2">
+    <section class="hero-section">
+        <div class="hero-inner">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <span class="hero-label fade-up">Hamilton, Ohio</span>
+                    <h1 class="fade-up stagger-1">Handcrafted Arrangements for Moments That Matter</h1>
+                    <p class="hero-description fade-up stagger-2">
                         Seasonal blooms, thoughtfully crafted. For Mother's Day, weddings, and every moment worth remembering.
                     </p>
-                    <div class="flex flex-wrap gap-4 fade-up stagger-3">
-                        <a href="order.html" class="inline-flex items-center px-8 py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm btn-primary hover:bg-taupe transition-colors">
-                            Order Now
-                        </a>
-                        <a href="inquiry.html" class="inline-flex items-center px-6 py-4 border border-espresso text-espresso font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-espresso hover:text-cream transition-colors">
-                            Have a Question?
-                        </a>
+                    <div class="hero-ctas fade-up stagger-3">
+                        <a href="order.html" class="btn btn-primary">Order Now</a>
+                        <a href="inquiry.html" class="btn btn-secondary">Have a Question?</a>
                     </div>
                 </div>
-                <div class="order-1 lg:order-2 fade-up stagger-2">
+                <div class="hero-image-wrap fade-up stagger-2">
                     <div class="relative">
-                        <img src="images/bouquet-mothers-day.jpg"
+                        <img src="images/bouquet-mothers-day-hero.jpg"
                              alt="Mother's Day bouquet featuring fresh seasonal blooms"
                              width="800" height="600"
                              loading="eager" decoding="async"
-                             class="w-full h-[500px] lg:h-[600px] object-cover rounded-sm shadow-lg">
-                        <div class="absolute bottom-6 left-6 bg-cream/90 backdrop-blur-sm px-4 py-3 rounded-sm">
-                            <p class="font-inter text-sm uppercase tracking-[0.05em] text-taupe">Mother's Day Collection</p>
-                            <p class="font-playfair text-lg text-espresso">Order by May 7</p>
+                             class="hero-image">
+                        <div class="hero-image-badge">
+                            <p class="hero-image-badge-label">Mother's Day Collection</p>
+                            <p class="hero-image-badge-text">Order by May 7</p>
                         </div>
                     </div>
                 </div>
@@ -158,180 +105,173 @@
         </div>
     </section>
 
-    <!-- Bouquet Feature -->
-    <section class="py-16 md:py-24 bg-surface">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
-            <div class="text-center mb-12">
-                <span class="font-inter text-sm uppercase tracking-[0.15em] text-sage mb-4 block">Mother's Day Collection</span>
-                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-4">Mother's Day Bouquet</h2>
-                <p class="text-taupe max-w-2xl mx-auto">A beautiful handcrafted arrangement, <span class="text-espresso font-medium">$65 with $10 delivery</span> (pickup available at no charge).</p>
+    <!-- Mother's Day Bouquet Feature -->
+    <section class="section section-surface">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Mother's Day Collection</span>
+                <h2 class="section-title">Mother's Day Bouquet</h2>
+                <p class="section-description">A beautiful handcrafted arrangement, <strong>$65 with $10 delivery</strong> (pickup available at no charge).</p>
             </div>
 
-            <div class="max-w-lg mx-auto bg-cream rounded-sm overflow-hidden card-hover fade-up stagger-1">
-                <img src="images/bouquet-mothers-day.jpg"
+            <div class="card max-w-lg mx-auto fade-up stagger-1">
+                <img src="images/bouquet-mothers-day-md.jpg"
                      alt="Mother's Day bouquet — handcrafted with fresh seasonal blooms"
                      width="600" height="400" loading="lazy" decoding="async"
-                     class="w-full h-96 object-cover">
-                <div class="p-6">
+                     class="card-img">
+                <div class="card-body">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-playfair text-xl">Mother's Day Bouquet</h3>
-                        <span class="font-playfair text-2xl text-espresso">$65</span>
+                        <h3 class="card-title" style="margin-bottom: 0;">Mother's Day Bouquet</h3>
+                        <span class="card-price">$65</span>
                     </div>
-                    <p class="text-taupe text-sm mb-4">Handcrafted with fresh, seasonal blooms. Each arrangement is made with love and delivered with care.</p>
-                    <a href="order.html" class="block w-full text-center px-6 py-3 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-taupe transition-colors">
-                        Order Now
-                    </a>
+                    <p class="card-description">Handcrafted with fresh, seasonal blooms. Each arrangement is made with love and delivered with care.</p>
+                    <a href="order.html" class="btn btn-primary btn-full">Order Now</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Mother's Day Banner -->
-    <section class="py-16 md:py-20 bg-espresso text-cream">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-8 text-center">
-            <span class="font-inter text-sm uppercase tracking-[0.15em] text-sage mb-4 block">Limited Time</span>
-            <h2 class="font-playfair text-3xl md:text-4xl lg:text-5xl font-normal mb-6">Mother's Day Delivery</h2>
-            <p class="text-lg md:text-xl text-cream/80 mb-4 max-w-2xl mx-auto">
+    <section class="section section-dark" style="background-color: var(--color-espresso); color: var(--color-ivory);">
+        <div class="container text-center">
+            <span class="section-label" style="color: var(--color-sage);">Limited Time</span>
+            <h2 class="section-title" style="color: var(--color-ivory);">Mother's Day Delivery</h2>
+            <p class="section-description" style="color: rgba(240,235,227,0.8); max-width: 42rem; margin-left: auto; margin-right: auto;">
                 Order by May 7, 2026 for guaranteed Mother's Day delivery. Handcrafted with love, delivered with care.
             </p>
-            <p class="font-inter text-sm uppercase tracking-[0.15em] text-terracotta mb-8">
+            <p class="font-inter text-sm uppercase tracking-widest mb-8" style="color: var(--color-terracotta); letter-spacing: 0.15em;">
                 Limited timeslots available
             </p>
-            <a href="order.html" class="inline-flex items-center px-8 py-4 bg-sage text-espresso font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-cream transition-colors duration-200">
+            <a href="order.html" class="btn btn-primary" style="background-color: var(--color-sage); color: var(--color-espresso);">
                 Order Now — Delivery on Mother's Day
             </a>
         </div>
     </section>
 
     <!-- Pricing Menu -->
-    <section class="py-16 md:py-24 bg-surface">
-        <div class="max-w-[600px] mx-auto px-4 sm:px-8">
-            <div class="text-center mb-12">
-                <span class="font-inter text-sm uppercase tracking-[0.15em] text-sage mb-4 block">Pricing</span>
-                <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-2">Our Menu</h2>
-                <p class="text-taupe text-sm">Ivy & Rose Floral Co. — Est. 2026</p>
+    <section class="section section-surface">
+        <div class="container-narrow">
+            <div class="section-header">
+                <span class="section-label">Pricing</span>
+                <h2 class="section-title">Our Menu</h2>
+                <p class="section-description" style="margin-bottom: 0;">Ivy &amp; Rose Floral Co. — Est. 2026</p>
             </div>
 
-            <div class="bg-cream rounded-sm border border-stone/40 p-8">
-                <div class="space-y-3">
-                    <div class="flex justify-between items-baseline py-2 border-b border-stone/30">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">Mini <span class="text-taupe normal-case">(5 stems)</span></span>
-                        <span class="font-playfair text-lg text-espresso">$15</span>
-                    </div>
-                    <div class="flex justify-between items-baseline py-2 border-b border-stone/30">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">Small <span class="text-taupe normal-case">(8 stems)</span></span>
-                        <span class="font-playfair text-lg text-espresso">$25</span>
-                    </div>
-                    <div class="flex justify-between items-baseline py-2 border-b border-stone/30">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">Medium <span class="text-taupe normal-case">(17 stems)</span></span>
-                        <span class="font-playfair text-lg text-espresso">$50</span>
-                    </div>
-                    <div class="flex justify-between items-baseline py-2 border-b border-stone/30">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">Large <span class="text-taupe normal-case">(27 stems)</span></span>
-                        <span class="font-playfair text-lg text-espresso">$75</span>
-                    </div>
-                    <div class="flex justify-between items-baseline py-2 border-b border-stone/30">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">X-Large <span class="text-taupe normal-case">(45 stems)</span></span>
-                        <span class="font-playfair text-lg text-espresso">$100</span>
-                    </div>
-                    <div class="flex justify-between items-baseline py-2 border-b border-stone/30">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">Designer's Choice</span>
-                        <span class="font-playfair text-lg text-espresso">$85</span>
-                    </div>
-                    <div class="flex justify-between items-baseline py-2 bg-terracotta/10 px-3 rounded">
-                        <span class="font-inter text-sm uppercase tracking-wider text-espresso">Mother's Day Special <span class="text-taupe normal-case">(23 stems)</span></span>
-                        <span class="font-playfair text-lg text-espresso">$65</span>
-                    </div>
+            <div class="pricing-menu">
+                <div class="pricing-row">
+                    <span class="pricing-name">Mini <span class="pricing-stems">(5 stems)</span></span>
+                    <span class="pricing-price">$15</span>
                 </div>
-                <div class="mt-4 pt-4 border-t border-stone/30">
-                    <p class="text-center text-taupe text-sm"><span class="font-medium text-espresso">$10 delivery charge</span> — Pickup available at no charge</p>
+                <div class="pricing-row">
+                    <span class="pricing-name">Small <span class="pricing-stems">(8 stems)</span></span>
+                    <span class="pricing-price">$25</span>
                 </div>
-                <p class="text-center text-taupe text-sm mt-3">Custom color palettes available upon request, subject to seasonal availability.</p>
+                <div class="pricing-row">
+                    <span class="pricing-name">Medium <span class="pricing-stems">(17 stems)</span></span>
+                    <span class="pricing-price">$50</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="pricing-name">Large <span class="pricing-stems">(27 stems)</span></span>
+                    <span class="pricing-price">$75</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="pricing-name">X-Large <span class="pricing-stems">(45 stems)</span></span>
+                    <span class="pricing-price">$100</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="pricing-name">Designer's Choice</span>
+                    <span class="pricing-price">$85</span>
+                </div>
+                <div class="pricing-row pricing-row-highlight">
+                    <span class="pricing-name">Mother's Day Special <span class="pricing-stems">(23 stems)</span></span>
+                    <span class="pricing-price">$65</span>
+                </div>
+                <div class="pricing-footer">
+                    <p><strong>$10 delivery charge</strong> — Pickup available at no charge</p>
+                </div>
+                <p class="pricing-note">Custom color palettes available upon request, subject to seasonal availability.</p>
             </div>
 
             <div class="text-center mt-8">
-                <a href="order.html" class="inline-flex items-center px-8 py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm btn-primary hover:bg-taupe transition-colors">
-                    Start Your Order
-                </a>
+                <a href="order.html" class="btn btn-primary">Start Your Order</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <!-- Coming soon — real customer reviews -->
+    <section class="testimonials-section" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Kind Words</span>
+                <h2 class="section-title">What Our Customers Say</h2>
+            </div>
+
+            <div class="testimonials-grid md:grid-cols-3">
+                <div class="testimonial-card" data-stagger>
+                    <p class="testimonial-quote">The Mother's Day bouquet was absolutely stunning. My mom cried when she saw it — she said it was the most beautiful arrangement she'd ever received.</p>
+                    <p class="testimonial-author">Sarah M.</p>
+                    <p class="testimonial-occasion">Mother's Day 2025</p>
+                </div>
+
+                <div class="testimonial-card" data-stagger>
+                    <p class="testimonial-quote">I ordered the Elegant Ivory for my grandmother and she was over the moon. The quality and care that went into it was obvious. Will definitely order again.</p>
+                    <p class="testimonial-author">David K.</p>
+                    <p class="testimonial-occasion">Birthday Arrangement</p>
+                </div>
+
+                <div class="testimonial-card" data-stagger>
+                    <p class="testimonial-quote">Supporting a local business that clearly puts love into every bouquet. The Sunset Garden arrangement was gorgeous — fresh, vibrant, and smelled amazing.</p>
+                    <p class="testimonial-author">Amanda R.</p>
+                    <p class="testimonial-occasion">Just Because</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 md:py-24">
-        <div class="max-w-2xl mx-auto px-4 sm:px-8 text-center">
-            <h2 class="font-playfair text-3xl md:text-4xl font-normal mb-4 fade-up">Ready to Make Someone's Day?</h2>
-            <p class="text-taupe mb-8 fade-up stagger-1">Whether it's Mother's Day, a birthday, or just because — we'd love to create something beautiful for you.</p>
+    <section class="section section-cream">
+        <div class="container-narrow text-center">
+            <h2 class="section-title fade-up">Ready to Make Someone's Day?</h2>
+            <p class="section-description fade-up stagger-1">Whether it's Mother's Day, a birthday, or just because — we'd love to create something beautiful for you.</p>
 
-            <div class="mb-8 bg-terracotta/10 border border-terracotta/20 rounded px-6 py-4 fade-up stagger-2">
-                <p class="font-inter text-sm uppercase tracking-[0.15em] text-terracotta">
-                    ⚠️ Order by May 7, 2026 for guaranteed Mother's Day delivery — Limited timeslots available
-                </p>
+            <!-- Deadline Banner -->
+            <div class="deadline-box fade-up stagger-2">
+                <p>⚠️ Order by May 7, 2026 for guaranteed Mother's Day delivery — Limited timeslots available</p>
             </div>
 
-            <div class="flex flex-wrap gap-4 justify-center fade-up stagger-3">
-                <a href="order.html" class="inline-flex items-center px-8 py-4 bg-espresso text-cream font-inter text-sm uppercase tracking-[0.05em] rounded-sm btn-primary hover:bg-taupe transition-colors">
-                    Order Now
-                </a>
-                <a href="inquiry.html" class="inline-flex items-center px-6 py-4 border border-espresso text-espresso font-inter text-sm uppercase tracking-[0.05em] rounded-sm hover:bg-espresso hover:text-cream transition-colors">
-                    Ask a Question
-                </a>
+            <div class="hero-ctas fade-up stagger-3">
+                <a href="order.html" class="btn btn-primary">Order Now</a>
+                <a href="inquiry.html" class="btn btn-secondary">Ask a Question</a>
             </div>
         </div>
     </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-espresso text-cream/60 py-12">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="text-center md:text-left">
-                    <p class="font-playfair text-lg text-cream mb-1">Ivy & Rose Floral Co.</p>
-                    <p class="font-inter text-xs uppercase tracking-[0.15em]">Hamilton, Ohio</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <p class="footer-brand-name">Ivy &amp; Rose Floral Co.</p>
+                    <p class="footer-brand-location">Hamilton, Ohio</p>
                 </div>
-                <div class="flex items-center gap-6">
-                    <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" aria-label="Visit Ivy & Rose Floral Co. on Instagram" class="text-cream/60 hover:text-cream transition-colors">
+                <div class="footer-social">
+                    <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" aria-label="Visit Ivy &amp; Rose Floral Co. on Instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
-                    <a href="order.html" class="text-cream/60 hover:text-cream transition-colors font-inter text-sm uppercase tracking-[0.05em]">Order</a>
-                    <a href="gallery.html" class="text-cream/60 hover:text-cream transition-colors font-inter text-sm uppercase tracking-[0.05em]">Gallery</a>
-                    <a href="inquiry.html" class="text-cream/60 hover:text-cream transition-colors font-inter text-sm uppercase tracking-[0.05em]">Contact</a>
+                    <a href="order.html" class="footer-nav-link">Order</a>
+                    <a href="gallery.html" class="footer-nav-link">Gallery</a>
+                    <a href="inquiry.html" class="footer-nav-link">Contact</a>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-cream/10 text-center">
-                <p class="font-inter text-xs text-cream/40">© 2026 Ivy & Rose Floral Co. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 Ivy &amp; Rose Floral Co. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileNav = document.getElementById('mobileNavPanel');
-        const navBackdrop = document.getElementById('navBackdrop');
-
-        function toggleNav() {
-            const isOpen = mobileNav.style.transform === 'translateX(0px)' || mobileNav.style.transform === 'translateX(0%)';
-            mobileNav.style.transform = isOpen ? 'translateX(100%)' : 'translateX(0)';
-            navBackdrop.style.opacity = isOpen ? '0' : '1';
-            navBackdrop.style.pointerEvents = isOpen ? 'none' : 'auto';
-            menuToggle.setAttribute('aria-expanded', String(!isOpen));
-            document.body.style.overflow = isOpen ? '' : 'hidden';
-        }
-
-        menuToggle.addEventListener('click', toggleNav);
-        navBackdrop.addEventListener('click', toggleNav);
-        document.querySelectorAll('#mobileNavPanel a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.style.transform = 'translateX(100%)';
-                navBackdrop.style.opacity = '0';
-                navBackdrop.style.pointerEvents = 'none';
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileNav.style.transform === 'translateX(0px)') toggleNav();
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
