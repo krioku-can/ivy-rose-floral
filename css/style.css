@@ -1743,6 +1743,334 @@ textarea.form-field {
 }
 
 /* ============================================================
+   SERVICE PAGES
+   ============================================================ */
+
+/* Services Hub Grid */
+.services-grid {
+  display: grid;
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+/* Service Card (hub) */
+.service-card {
+  display: block;
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-stone);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(44, 36, 25, 0.12);
+  border-color: var(--color-sage);
+}
+
+.service-card-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.service-card-title {
+  font-family: var(--font-playfair);
+  font-size: 1.375rem;
+  margin-bottom: 12px;
+}
+
+.service-card-desc {
+  font-size: 0.9375rem;
+  color: var(--color-taupe);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.service-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.service-card-tags li {
+  font-family: var(--font-inter);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sage);
+  background-color: rgba(139, 157, 131, 0.1);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.service-card-cta {
+  font-family: var(--font-inter);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-espresso);
+  font-weight: 500;
+}
+
+.service-card:hover .service-card-cta {
+  color: var(--color-sage);
+}
+
+/* Highlighted card (pet-friendly) */
+.service-card-highlight {
+  border-color: var(--color-sage);
+  background-color: rgba(139, 157, 131, 0.05);
+}
+
+/* Services Detail Grid */
+.services-detail-grid {
+  display: grid;
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .services-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Service Detail Card */
+.service-detail-card {
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-stone);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+}
+
+.service-detail-emoji {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.service-detail-title {
+  font-family: var(--font-playfair);
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+}
+
+.service-detail-desc {
+  font-size: 0.9375rem;
+  color: var(--color-taupe);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.service-detail-price {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sage);
+  display: block;
+}
+
+/* How It Works */
+.how-it-works {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.how-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.how-step-number {
+  font-family: var(--font-playfair);
+  font-size: 2rem;
+  color: var(--color-sage);
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(139, 157, 131, 0.1);
+  border-radius: 50%;
+}
+
+.how-step-title {
+  font-family: var(--font-playfair);
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.how-step-desc {
+  font-size: 0.9375rem;
+  color: var(--color-taupe);
+  line-height: 1.7;
+}
+
+/* Event Types List */
+.event-types-list {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.event-type-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-stone);
+}
+
+.event-type-row:last-child {
+  border-bottom: none;
+}
+
+.event-type-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.event-type-row strong {
+  font-family: var(--font-inter);
+  font-size: 0.9375rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.event-type-row p {
+  font-size: 0.875rem;
+  color: var(--color-taupe);
+  margin: 0;
+}
+
+/* Pet Warning Box */
+.pet-warning-box {
+  background-color: rgba(193, 127, 89, 0.08);
+  border: 1px solid rgba(193, 127, 89, 0.2);
+  border-radius: var(--radius-md);
+  padding: 32px;
+}
+
+.pet-warning-title {
+  font-family: var(--font-inter);
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-terracotta);
+  margin-bottom: 20px;
+}
+
+.pet-warning-grid {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .pet-warning-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pet-warning-col h4 {
+  font-family: var(--font-inter);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-espresso);
+  margin-bottom: 12px;
+}
+
+.pet-warning-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pet-warning-col li {
+  font-size: 0.9375rem;
+  color: var(--color-taupe);
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.pet-warning-col li::before {
+  content: '×';
+  color: var(--color-terracotta);
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.pet-warning-note {
+  font-size: 0.8125rem;
+  color: var(--color-taupe);
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(193, 127, 89, 0.15);
+}
+
+/* Safe Blooms Grid */
+.safe-blooms-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .safe-blooms-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.safe-bloom-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-stone);
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.safe-bloom-emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.safe-bloom-card h4 {
+  font-family: var(--font-playfair);
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.safe-bloom-card p {
+  font-size: 0.8125rem;
+  color: var(--color-taupe);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
