@@ -1,5 +1,22 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+// Haversine distance in miles
+function haversine(lat1, lon1, lat2, lon2) {
+  const R = 3958.8;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+// Origin coordinates (2169 Elmo Ave, Hamilton, OH 45015 — never exposed to user)
+const ORIGIN_LAT = 39.3754;
+const ORIGIN_LON = -84.5594;
+const MAX_DELIVERY_MILES = 20;
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -35,6 +52,28 @@ export default async function handler(req, res) {
     const item = pricing[size];
     if (!item) {
       return res.status(400).json({ error: 'Invalid size selection' });
+    }
+
+    // Server-side delivery distance verification
+    if (fulfillmentMethod === 'delivery' && deliveryAddress) {
+      try {
+        const geoUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(deliveryAddress)}&format=json&limit=1&countrycodes=us`;
+        const geoRes = await fetch(geoUrl, { headers: { 'User-Agent': 'IvyRoseFloral/1.0' } });
+        const geoData = await geoRes.json();
+        if (geoData && geoData.length > 0) {
+          const lat = parseFloat(geoData[0].lat);
+          const lon = parseFloat(geoData[0].lon);
+          const distance = haversine(ORIGIN_LAT, ORIGIN_LON, lat, lon);
+          if (distance > MAX_DELIVERY_MILES) {
+            return res.status(400).json({
+              error: 'Your delivery address is outside our delivery area (20 miles from Hamilton). Please choose pickup instead.'
+            });
+          }
+        }
+        // If geocoding fails, allow through — don't block orders on geocoding errors
+      } catch (geoErr) {
+        console.error('Server-side geocoding failed (allowing order through):', geoErr.message);
+      }
     }
 
     // Build fulfillment description for Stripe line item
@@ -109,31 +148,33 @@ export default async function handler(req, res) {
       },
     });
 
-    // Send Chey a notification email (non-blocking — don't block checkout if email fails)
+    // Send Chey a notification email (non-blocking)
     const totalCents = item.price + (fulfillmentMethod === 'delivery' ? 1000 : 0);
-    const orderEmail = [
-      `🌸 New Ivy & Rose Order!`,
-      ``,
+    const methodLabel = fulfillmentMethod === 'pickup'
+      ? `Pickup: ${pickupDate || 'TBD'} at ${pickupTime || 'TBD'}`
+      : `Delivery: ${deliveryDay || 'TBD'}, ${deliveryTime || 'TBD'}`;
+
+    const emailBody = [
+      '🌸 New Ivy & Rose Order!',
+      '',
       `Size: ${item.name}`,
       `Price: $${(item.price / 100).toFixed(2)}${fulfillmentMethod === 'delivery' ? ' + $10 delivery' : ''}`,
       `Total: $${(totalCents / 100).toFixed(2)}`,
-      ``,
+      '',
       `Customer: ${name || 'Unknown'}`,
       `Phone: ${phone || 'Not provided'}`,
       `Email: ${email || 'Not provided'}`,
-      ``,
-      fulfillmentMethod === 'pickup'
-        ? `Pickup: ${pickupDate || 'TBD'} at ${pickupTime || 'TBD'}`
-        : `Delivery: ${deliveryDay || 'TBD'}, ${deliveryTime || 'TBD'}`,
+      '',
+      methodLabel,
       ...(fulfillmentMethod === 'delivery' ? [
         `Recipient: ${recipient || 'N/A'}`,
         `Address: ${deliveryAddress || 'N/A'}`,
       ] : []),
-      ``,
+      '',
       `Card Message: ${cardMessage || 'None'}`,
       `Special Instructions: ${specialInstructions || 'None'}`,
-      ``,
-      `View in Stripe: https://dashboard.stripe.com/payments`,
+      '',
+      'View in Stripe: https://dashboard.stripe.com/payments',
     ].join('\n');
 
     if (process.env.RESEND_API_KEY) {
@@ -146,8 +187,8 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           from: 'Ivy & Rose Orders <orders@ivyrosefloralco.com>',
           to: ['ivyrosefloralco@gmail.com'],
-          subject: `🌸 New Order from ${name || 'Customer'} — $${(totalCents / 100).toFixed(2)}`,
-          text: orderEmail,
+          subject: `🌸 New Order — ${item.name} — $${(totalCents / 100).toFixed(2)}`,
+          text: emailBody,
         }),
       }).catch(err => console.error('Email notification failed:', err.message));
     }

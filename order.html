@@ -182,6 +182,9 @@
           <div class="form-group">
             <label for="address" class="form-label">Delivery Address <span class="required" aria-label="required">*</span></label>
             <textarea id="address" rows="2" autocomplete="street-address" class="form-field" placeholder="123 Maple Lane, Hamilton, OH 45013"></textarea>
+            <p class="form-hint" id="addressHint">Enter the full delivery address. We deliver within 20 miles of Hamilton.</p>
+            <div id="addressError" class="form-error" style="display:none; color:#c0392b; font-size:0.9rem; margin-top:4px;"></div>
+            <div id="addressOk" class="form-hint" style="display:none; color:#27ae60; margin-top:4px;"></div>
           </div>
           <div class="form-group">
             <label for="deliveryDay" class="form-label">Delivery Day <span class="required" aria-label="required">*</span></label>
@@ -276,6 +279,8 @@
 
   <script>
     let currentMethod = 'pickup';
+    let addressVerified = false; // Track delivery address validation
+    let addressVerifying = false;
 
     const pickupWindows = {
       weekday: ['9:30 AM - 10:30 AM', '10:30 AM - 11:30 AM', '11:30 AM - 12:30 PM', '12:30 PM - 1:30 PM', '1:30 PM - 2:30 PM'],
@@ -339,6 +344,43 @@
     document.getElementById('pickupDate').addEventListener('change', updatePickupTimeOptions);
     document.getElementById('pickupTime').addEventListener('change', updatePickupTimeFull);
 
+    // Delivery address verification
+    let addressDebounce = null;
+    document.getElementById('address').addEventListener('input', function() {
+      addressVerified = false;
+      document.getElementById('addressError').style.display = 'none';
+      document.getElementById('addressOk').style.display = 'none';
+      clearTimeout(addressDebounce);
+      const val = this.value.trim();
+      if (val.length < 10) return; // Too short to geocode
+      addressDebounce = setTimeout(async () => {
+        addressVerifying = true;
+        try {
+          const res = await fetch('/api/verify-delivery', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ address: val })
+          });
+          const data = await res.json();
+          if (data.valid) {
+            addressVerified = true;
+            document.getElementById('addressError').style.display = 'none';
+            document.getElementById('addressOk').style.display = 'block';
+            document.getElementById('addressOk').textContent = data.distance ? `✓ Delivery available (${data.distance} miles away)` : '✓ Address verified';
+          } else {
+            addressVerified = false;
+            document.getElementById('addressError').style.display = 'block';
+            document.getElementById('addressError').textContent = data.reason || 'Address is outside our delivery area. Please choose pickup instead.';
+            document.getElementById('addressOk').style.display = 'none';
+          }
+        } catch (err) {
+          // On error, allow through — don't block on geocoding failure
+          addressVerified = true;
+        }
+        addressVerifying = false;
+      }, 800);
+    });
+
     function selectMethod(method) {
       currentMethod = method;
       const pickupBtn = document.getElementById('pickupBtn');
@@ -390,6 +432,18 @@
 
       if (!form.checkValidity()) {
         form.reportValidity();
+        return;
+      }
+
+      // Block submission if delivery address is not verified
+      if (method === 'delivery' && !addressVerified && document.getElementById('address').value.trim().length >= 10) {
+        if (addressVerifying) {
+          alert('Please wait while we verify your delivery address...');
+        } else {
+          alert('Your delivery address is outside our delivery area (20 miles from Hamilton). Please choose pickup instead, or enter a closer address.');
+        }
+        submitButton.disabled = false;
+        submitButton.textContent = 'Proceed to Payment';
         return;
       }
 
