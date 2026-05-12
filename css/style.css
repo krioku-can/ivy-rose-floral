@@ -657,6 +657,14 @@ input, textarea, select {
   margin-bottom: 24px;
 }
 
+.hero-content-float .hero-tagline {
+  font-family: var(--font-inter);
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
 .hero-content-float .hero-description {
   font-size: 1.125rem;
   line-height: 1.7;
