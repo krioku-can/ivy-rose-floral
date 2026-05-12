@@ -29,32 +29,30 @@
           <polyline points="22 4 12 14.01 9 11.01"></polyline>
         </svg>
       </div>
-      <h1 class="font-playfair text-3xl md:text-4xl font-normal mb-4">
+      <h1 class="font-playfair text-3xl md:text-4xl font-normal mb-4" id="successTitle">
         Thank You!
       </h1>
-      <p class="text-taupe text-lg mb-6">
-        Your order has been received. We'll contact you within 24 hours to confirm all the details.
+      <p class="text-taupe text-lg mb-6" id="successMessage">
+        Your order and payment have been received. We'll be in touch to confirm pickup or delivery details!
       </p>
       <div class="next-steps-box">
         <h2 class="next-steps-title">What happens next?</h2>
         <ol class="next-steps-list">
           <li>
             <span class="step-number">1</span>
-            <span>We'll review your order details</span>
+            <span>Your payment has been processed</span>
           </li>
           <li>
             <span class="step-number">2</span>
-            <span>We'll call or text to confirm</span>
+            <span>We'll text or call to confirm your pickup/delivery</span>
           </li>
           <li>
             <span class="step-number">3</span>
-            <span>Payment is collected on delivery (cash or Venmo)</span>
+            <span>Enjoy your handcrafted arrangement!</span>
           </li>
         </ol>
       </div>
-      <div class="prototype-notice">
-        ⚠️ This is a prototype confirmation page. For demo purposes only.
-      </div>
+
       <div class="flex flex-wrap gap-4 justify-center mt-8">
         <a href="index.html" class="btn btn-primary">Back to Home</a>
         <a href="https://instagram.com/ivyrosefloralco" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
@@ -73,5 +71,13 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    // Show payment confirmation if returning from Stripe
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('session_id')) {
+      document.getElementById('successTitle').textContent = 'Order Confirmed!';
+      document.getElementById('successMessage').textContent = 'Your payment was successful. We\'ll text you to confirm your pickup or delivery details!';
+    }
+  </script>
 </body>
 </html>
