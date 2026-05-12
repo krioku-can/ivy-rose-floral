@@ -649,12 +649,54 @@ input, textarea, select {
   display: block;
 }
 
-.hero-content-float h1 {
+.hero-content-float.hero-content-top {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  padding-top: 48px;
+  padding-bottom: auto;
+}
+
+.hero-content-float.hero-content-top h1 {
   font-family: var(--font-playfair);
-  font-size: 2.5rem;
   font-weight: 400;
-  line-height: 1.1;
-  margin-bottom: 24px;
+  margin-bottom: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.hero-content-top h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+@media (min-width: 768px) {
+  .hero-content-top h1 {
+    font-size: 2.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-content-top h1 {
+    font-size: 3.25rem;
+  }
+}
+
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 16px 24px;
+  background: linear-gradient(to top, rgba(44,36,25,0.6), transparent);
+}
+
+.hero-bottom-location {
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-cream);
 }
 
 .hero-content-float .hero-tagline {
