@@ -593,13 +593,77 @@ input, textarea, select {
 }
 
 /* ============================================================
-   HERO SECTION
+   HERO SECTION — Image-First (Full Bleed)
    ============================================================ */
 .hero-section {
   position: relative;
   overflow: hidden;
 }
 
+/* Full-bleed hero image */
+.hero-image-first {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(44, 36, 25, 0.35) 0%,
+    rgba(44, 36, 25, 0.55) 50%,
+    rgba(44, 36, 25, 0.7) 100%
+  );
+  z-index: 2;
+}
+
+.hero-content-float {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-content-float .hero-label {
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-sage);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.hero-content-float h1 {
+  font-family: var(--font-playfair);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.hero-content-float .hero-description {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Preserve old hero grid classes for fallback/other pages */
 .hero-inner {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -642,6 +706,7 @@ input, textarea, select {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  justify-content: center;
 }
 
 .hero-image-wrap {
@@ -657,6 +722,14 @@ input, textarea, select {
 }
 
 @media (min-width: 768px) {
+  .hero-content-float h1 {
+    font-size: 3.25rem;
+  }
+
+  .hero-content-float {
+    padding: 100px 48px;
+  }
+
   .hero-inner {
     padding: 96px var(--space-sm);
   }
@@ -667,6 +740,18 @@ input, textarea, select {
 }
 
 @media (min-width: 1024px) {
+  .hero-image-first {
+    min-height: 80vh;
+  }
+
+  .hero-content-float h1 {
+    font-size: 4rem;
+  }
+
+  .hero-content-float {
+    padding: 120px 64px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr 1fr;
     gap: 64px;
