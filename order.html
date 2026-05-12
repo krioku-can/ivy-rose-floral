@@ -132,6 +132,26 @@
         <input type="hidden" id="fulfillmentMethod" value="Pickup">
       </div>
 
+      <!-- Pickup Date & Time -->
+      <div class="form-section" id="pickupScheduleSection">
+        <h2 class="form-section-title">Pickup Date &amp; Time</h2>
+        <div class="space-y-4">
+          <div class="form-group">
+            <label for="pickupDate" class="form-label">Pickup Date <span class="required" aria-label="required">*</span></label>
+            <input type="date" id="pickupDate" required aria-required="true" class="form-field">
+            <script>document.getElementById('pickupDate').min = new Date().toISOString().split('T')[0];</script>
+          </div>
+          <div class="form-group">
+            <label for="pickupTime" class="form-label">Pickup Time <span class="required" aria-label="required">*</span></label>
+            <select id="pickupTime" required aria-required="true" class="form-field form-field-select" disabled>
+              <option value="" disabled selected>Choose a date first</option>
+            </select>
+            <input type="hidden" id="pickupTimeFull" value="">
+            <p class="form-hint" id="pickupTimeHint">Pickup windows: Monday–Friday 9:30 AM–2:30 PM, Saturday 8–10 AM &amp; 2–6 PM, Sunday 8 AM–5 PM.</p>
+          </div>
+        </div>
+      </div>
+
       <!-- Your Info -->
       <div class="form-section">
         <h2 class="form-section-title">Your Info</h2>
@@ -151,7 +171,7 @@
         </div>
       </div>
 
-      <!-- Delivery Info (shown only when delivery selected) -->
+      // Delivery Info (shown only when delivery selected)
       <div class="delivery-section form-section" id="deliverySection">
         <h2 class="form-section-title">Delivery Info</h2>
         <div class="space-y-4">
@@ -257,6 +277,68 @@
   <script>
     let currentMethod = 'pickup';
 
+    const pickupWindows = {
+      weekday: ['9:30 AM - 10:30 AM', '10:30 AM - 11:30 AM', '11:30 AM - 12:30 PM', '12:30 PM - 1:30 PM', '1:30 PM - 2:30 PM'],
+      saturday: ['8:00 AM - 9:00 AM', '9:00 AM - 10:00 AM', '2:00 PM - 3:00 PM', '3:00 PM - 4:00 PM', '4:00 PM - 5:00 PM', '5:00 PM - 6:00 PM'],
+      sunday: ['8:00 AM - 9:00 AM', '9:00 AM - 10:00 AM', '10:00 AM - 11:00 AM', '11:00 AM - 12:00 PM', '12:00 PM - 1:00 PM', '1:00 PM - 2:00 PM', '2:00 PM - 3:00 PM', '3:00 PM - 4:00 PM', '4:00 PM - 5:00 PM']
+    };
+
+    function getPickupWindowGroup(dateValue) {
+      const [year, month, day] = dateValue.split('-').map(Number);
+      const date = new Date(year, month - 1, day);
+      const weekday = date.getDay();
+      if (weekday === 0) return 'sunday';
+      if (weekday === 6) return 'saturday';
+      return 'weekday';
+    }
+
+    function formatWindowLabel(windowText) {
+      return windowText.replace(' - ', ' – ');
+    }
+
+    function updatePickupTimeOptions() {
+      const date = document.getElementById('pickupDate').value;
+      const select = document.getElementById('pickupTime');
+      const previous = select.value;
+      select.innerHTML = '';
+
+      if (!date) {
+        select.disabled = true;
+        select.innerHTML = '<option value="" disabled selected>Choose a date first</option>';
+        document.getElementById('pickupTimeFull').value = '';
+        return;
+      }
+
+      const group = getPickupWindowGroup(date);
+      const windows = pickupWindows[group];
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = 'Choose a pickup time';
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+
+      windows.forEach(windowText => {
+        const option = document.createElement('option');
+        option.value = windowText;
+        option.textContent = formatWindowLabel(windowText);
+        select.appendChild(option);
+      });
+
+      select.disabled = false;
+      if (windows.includes(previous)) select.value = previous;
+      updatePickupTimeFull();
+    }
+
+    function updatePickupTimeFull() {
+      const date = document.getElementById('pickupDate').value;
+      const time = document.getElementById('pickupTime').value;
+      document.getElementById('pickupTimeFull').value = date && time ? 'Pickup — ' + date + ' — ' + time : '';
+    }
+
+    document.getElementById('pickupDate').addEventListener('change', updatePickupTimeOptions);
+    document.getElementById('pickupTime').addEventListener('change', updatePickupTimeFull);
+
     function selectMethod(method) {
       currentMethod = method;
       const pickupBtn = document.getElementById('pickupBtn');
@@ -269,24 +351,34 @@
         pickupBtn.classList.add('active');
         deliveryBtn.classList.remove('active');
         deliverySection.classList.remove('open');
+        pickupSection.classList.add('open');
         fulfillmentInput.value = 'Pickup';
-        notice.innerHTML = '<p><span class="fulfillment-notice-label">Pickup</span>Pickup available at no charge. We\'ll coordinate details after you order.</p>';
+        notice.innerHTML = '<p><span class="fulfillment-notice-label">Pickup</span>Choose your pickup date and time below.</p>';
 
-        // Remove required from delivery fields
+        // Pickup fields required
+        document.getElementById('pickupDate').setAttribute('required', 'true');
+        document.getElementById('pickupTime').setAttribute('required', 'true');
+        // Delivery fields not required
         document.getElementById('recipient').removeAttribute('required');
         document.getElementById('address').removeAttribute('required');
+        document.getElementById('deliveryDay').removeAttribute('required');
         document.getElementById('timeslot').removeAttribute('required');
       } else {
         deliveryBtn.classList.add('active');
         pickupBtn.classList.remove('active');
         deliverySection.classList.add('open');
+        pickupSection.classList.remove('open');
         fulfillmentInput.value = 'Delivery ($10)';
         notice.innerHTML = '<p><span class="fulfillment-notice-label">Delivery</span>$10 delivery charge. Monday–Friday, 9 AM–Noon.</p>';
 
-        // Add required to delivery fields
+        // Delivery fields required
         document.getElementById('recipient').setAttribute('required', 'true');
         document.getElementById('address').setAttribute('required', 'true');
+        document.getElementById('deliveryDay').setAttribute('required', 'true');
         document.getElementById('timeslot').setAttribute('required', 'true');
+        // Pickup fields not required
+        document.getElementById('pickupDate').removeAttribute('required');
+        document.getElementById('pickupTime').removeAttribute('required');
       }
     }
 
@@ -304,9 +396,8 @@
       submitButton.disabled = true;
       submitButton.textContent = 'Redirecting to checkout...';
 
-      // Build order data
-      const size = document.getElementById('sizeSelect').value;
-      const method = currentMethod; // 'pickup' or 'delivery'
+      const pickupDate = method === 'pickup' ? document.getElementById('pickupDate').value : '';
+      const pickupTime = method === 'pickup' ? document.getElementById('pickupTime').value : '';
       const deliveryDay = method === 'delivery' ? document.getElementById('deliveryDay').value : '';
       const deliveryTime = method === 'delivery' ? document.getElementById('timeslot').value : '';
       const recipient = method === 'delivery' ? document.getElementById('recipient').value : '';
@@ -322,6 +413,8 @@
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
             fulfillmentMethod: method,
+            pickupDate: pickupDate,
+            pickupTime: pickupTime,
             deliveryDay: deliveryDay,
             deliveryTime: deliveryTime,
             recipient: recipient,
@@ -350,6 +443,7 @@
 
     // Initialize
     selectMethod('pickup');
+    updatePickupTimeOptions();
   </script>
   <script src="js/main.js"></script>
 </body>

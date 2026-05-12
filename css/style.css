@@ -2229,14 +2229,16 @@ textarea.form-field {
 /* ============================================================
    DELIVERY SECTION (toggle show/hide)
    ============================================================ */
-.delivery-section {
+.delivery-section,
+#pickupScheduleSection {
   max-height: 0;
   overflow: hidden;
   transition: max-height 400ms ease-out, opacity 300ms ease;
   opacity: 0;
 }
 
-.delivery-section.open {
+.delivery-section.open,
+#pickupScheduleSection.open {
   max-height: 800px;
   opacity: 1;
 }

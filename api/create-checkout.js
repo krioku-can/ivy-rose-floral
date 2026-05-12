@@ -12,6 +12,8 @@ export default async function handler(req, res) {
       phone,
       email,
       fulfillmentMethod,
+      pickupDate,
+      pickupTime,
       deliveryDay,
       deliveryTime,
       recipient,
@@ -35,13 +37,27 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid size selection' });
     }
 
+    // Build fulfillment description for Stripe line item
+    let fulfillmentDesc = '';
+    if (fulfillmentMethod === 'pickup' && pickupDate && pickupTime) {
+      const dateObj = new Date(pickupDate + 'T12:00:00');
+      const formatted = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+      fulfillmentDesc = `Pickup on ${formatted}, ${pickupTime}`;
+    } else if (fulfillmentMethod === 'delivery' && deliveryDay && deliveryTime) {
+      fulfillmentDesc = `Delivery on ${deliveryDay}, ${deliveryTime}`;
+    } else if (fulfillmentMethod === 'pickup') {
+      fulfillmentDesc = 'Pickup — date/time TBD';
+    } else {
+      fulfillmentDesc = 'Delivery — date/time TBD';
+    }
+
     // Build line items
     const lineItems = [{
       price_data: {
         currency: 'usd',
         product_data: {
           name: item.name,
-          description: 'Handcrafted arrangement by Ivy & Rose Floral Co.',
+          description: fulfillmentDesc,
         },
         unit_amount: item.price,
       },
@@ -55,7 +71,7 @@ export default async function handler(req, res) {
           currency: 'usd',
           product_data: {
             name: 'Delivery',
-            description: 'Monday–Friday, 9 AM–Noon',
+            description: deliveryDay && deliveryTime ? `${deliveryDay}, ${deliveryTime}` : 'Monday–Friday, 9 AM–Noon',
           },
           unit_amount: 1000, // $10
         },
@@ -68,6 +84,8 @@ export default async function handler(req, res) {
       customer_name: (name || '').substring(0, 500),
       customer_phone: (phone || '').substring(0, 500),
       fulfillment_method: fulfillmentMethod || 'pickup',
+      pickup_date: (pickupDate || '').substring(0, 500),
+      pickup_time: (pickupTime || '').substring(0, 500),
       delivery_day: (deliveryDay || '').substring(0, 500),
       delivery_time: (deliveryTime || '').substring(0, 500),
       recipient: (recipient || '').substring(0, 500),
@@ -80,8 +98,8 @@ export default async function handler(req, res) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${process.env.BASE_URL || 'https://ivy-rose-evergreen-preview.vercel.app'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.BASE_URL || 'https://ivy-rose-evergreen-preview.vercel.app'}/order.html`,
+      success_url: `${process.env.BASE_URL || 'https://ivyrosefloralco.com'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.BASE_URL || 'https://ivyrosefloralco.com'}/order.html`,
       customer_email: email || undefined,
       metadata,
       custom_text: {
@@ -90,6 +108,49 @@ export default async function handler(req, res) {
         },
       },
     });
+
+    // Send Chey a notification email (non-blocking — don't block checkout if email fails)
+    const totalCents = item.price + (fulfillmentMethod === 'delivery' ? 1000 : 0);
+    const orderEmail = [
+      `🌸 New Ivy & Rose Order!`,
+      ``,
+      `Size: ${item.name}`,
+      `Price: $${(item.price / 100).toFixed(2)}${fulfillmentMethod === 'delivery' ? ' + $10 delivery' : ''}`,
+      `Total: $${(totalCents / 100).toFixed(2)}`,
+      ``,
+      `Customer: ${name || 'Unknown'}`,
+      `Phone: ${phone || 'Not provided'}`,
+      `Email: ${email || 'Not provided'}`,
+      ``,
+      fulfillmentMethod === 'pickup'
+        ? `Pickup: ${pickupDate || 'TBD'} at ${pickupTime || 'TBD'}`
+        : `Delivery: ${deliveryDay || 'TBD'}, ${deliveryTime || 'TBD'}`,
+      ...(fulfillmentMethod === 'delivery' ? [
+        `Recipient: ${recipient || 'N/A'}`,
+        `Address: ${deliveryAddress || 'N/A'}`,
+      ] : []),
+      ``,
+      `Card Message: ${cardMessage || 'None'}`,
+      `Special Instructions: ${specialInstructions || 'None'}`,
+      ``,
+      `View in Stripe: https://dashboard.stripe.com/payments`,
+    ].join('\n');
+
+    if (process.env.RESEND_API_KEY) {
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Ivy & Rose Orders <orders@ivyrosefloralco.com>',
+          to: ['ivyrosefloralco@gmail.com'],
+          subject: `🌸 New Order from ${name || 'Customer'} — $${(totalCents / 100).toFixed(2)}`,
+          text: orderEmail,
+        }),
+      }).catch(err => console.error('Email notification failed:', err.message));
+    }
 
     res.status(200).json({ sessionId: session.id, url: session.url });
   } catch (err) {
