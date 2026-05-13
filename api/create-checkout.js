@@ -185,7 +185,7 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Ivy & Rose Orders <orders@ivyrosefloralco.com>',
+          from: 'Ivy & Rose Orders <onboarding@resend.dev>',
           to: ['ivyrosefloralco@gmail.com'],
           subject: `🌸 New Order — ${item.name} — $${(totalCents / 100).toFixed(2)}`,
           text: emailBody,
