@@ -1,5 +1,9 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
+
+if (process.env.SENDGRID_API_KEY) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+}
 
 // Haversine distance in miles
 function haversine(lat1, lon1, lat2, lon2) {
@@ -18,25 +22,9 @@ const ORIGIN_LAT = 39.3754;
 const ORIGIN_LON = -84.5594;
 const MAX_DELIVERY_MILES = 20;
 
-// Create Gmail transporter once
-let transporter = null;
-function getTransporter() {
-  if (!transporter && process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
-    transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-    });
-  }
-  return transporter;
-}
-
 async function sendOrderNotification(orderDetails) {
-  const t = getTransporter();
-  if (!t) {
-    console.error('Email not configured — set GMAIL_USER and GMAIL_APP_PASSWORD');
+  if (!process.env.SENDGRID_API_KEY) {
+    console.error('Email not configured — set SENDGRID_API_KEY');
     return;
   }
 
@@ -68,13 +56,16 @@ async function sendOrderNotification(orderDetails) {
   ].join('\n');
 
   try {
-    const info = await t.sendMail({
-      from: `"Ivy & Rose Orders" <${process.env.GMAIL_USER}>`,
-      to: process.env.NOTIFY_EMAIL || process.env.GMAIL_USER,
+    await sgMail.send({
+      to: process.env.NOTIFY_EMAIL || 'ivyrosefloralco@gmail.com',
+      from: {
+        email: 'noreply@ivyrosefloralco.com',
+        name: 'Ivy & Rose Orders',
+      },
       subject: `🌸 New Order — ${itemName} — ${totalFormatted}`,
       text: emailBody,
     });
-    console.log('Order notification sent:', info.messageId);
+    console.log('Order notification sent via SendGrid');
   } catch (err) {
     console.error('Failed to send order notification:', err.message);
   }
