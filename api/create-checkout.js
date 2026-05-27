@@ -58,7 +58,7 @@ async function sendOrderNotification(orderDetails) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Ivy & Rose Orders <orders@ivyrosefloralco.com>',
+        from: 'Ivy & Rose Orders <onboarding@resend.dev>',
         to: [process.env.NOTIFY_EMAIL || 'ivyrosefloralco@gmail.com'],
         subject: `🌸 New Order — ${itemName} — ${totalFormatted}`,
         text: emailBody,
