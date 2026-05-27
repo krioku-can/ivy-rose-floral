@@ -437,7 +437,7 @@
       }
 
       // Block submission if delivery address is not verified
-      if (method === 'delivery' && !addressVerified && document.getElementById('address').value.trim().length >= 10) {
+      if (currentMethod === 'delivery' && !addressVerified && document.getElementById('address').value.trim().length >= 10) {
         if (addressVerifying) {
           alert('Please wait while we verify your delivery address...');
         } else {
@@ -451,12 +451,12 @@
       submitButton.disabled = true;
       submitButton.textContent = 'Redirecting to checkout...';
 
-      const pickupDate = method === 'pickup' ? document.getElementById('pickupDate').value : '';
-      const pickupTime = method === 'pickup' ? document.getElementById('pickupTime').value : '';
-      const deliveryDay = method === 'delivery' ? document.getElementById('deliveryDay').value : '';
-      const deliveryTime = method === 'delivery' ? document.getElementById('timeslot').value : '';
-      const recipient = method === 'delivery' ? document.getElementById('recipient').value : '';
-      const address = method === 'delivery' ? document.getElementById('address').value : '';
+      const pickupDate = currentMethod === 'pickup' ? document.getElementById('pickupDate').value : '';
+      const pickupTime = currentMethod === 'pickup' ? document.getElementById('pickupTime').value : '';
+      const deliveryDay = currentMethod === 'delivery' ? document.getElementById('deliveryDay').value : '';
+      const deliveryTime = currentMethod === 'delivery' ? document.getElementById('timeslot').value : '';
+      const recipient = currentMethod === 'delivery' ? document.getElementById('recipient').value : '';
+      const address = currentMethod === 'delivery' ? document.getElementById('address').value : '';
 
       try {
         const response = await fetch('/api/create-checkout', {
@@ -467,7 +467,7 @@
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
-            fulfillmentMethod: method,
+            fulfillmentMethod: currentMethod,
             pickupDate: pickupDate,
             pickupTime: pickupTime,
             deliveryDay: deliveryDay,
