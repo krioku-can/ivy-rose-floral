@@ -1,9 +1,4 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const sgMail = require('@sendgrid/mail');
-
-if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-}
 
 // Haversine distance in miles
 function haversine(lat1, lon1, lat2, lon2) {
@@ -23,8 +18,8 @@ const ORIGIN_LON = -84.5594;
 const MAX_DELIVERY_MILES = 20;
 
 async function sendOrderNotification(orderDetails) {
-  if (!process.env.SENDGRID_API_KEY) {
-    console.error('Email not configured — set SENDGRID_API_KEY');
+  if (!process.env.RESEND_API_KEY) {
+    console.error('Email not configured — set RESEND_API_KEY');
     return;
   }
 
@@ -56,16 +51,25 @@ async function sendOrderNotification(orderDetails) {
   ].join('\n');
 
   try {
-    await sgMail.send({
-      to: process.env.NOTIFY_EMAIL || 'ivyrosefloralco@gmail.com',
-      from: {
-        email: 'noreply@ivyrosefloralco.com',
-        name: 'Ivy & Rose Orders',
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
       },
-      subject: `🌸 New Order — ${itemName} — ${totalFormatted}`,
-      text: emailBody,
+      body: JSON.stringify({
+        from: 'Ivy & Rose Orders <orders@ivyrosefloralco.com>',
+        to: [process.env.NOTIFY_EMAIL || 'ivyrosefloralco@gmail.com'],
+        subject: `🌸 New Order — ${itemName} — ${totalFormatted}`,
+        text: emailBody,
+      }),
     });
-    console.log('Order notification sent via SendGrid');
+    if (res.ok) {
+      console.log('Order notification sent via Resend');
+    } else {
+      const errData = await res.text();
+      console.error('Resend API error:', res.status, errData);
+    }
   } catch (err) {
     console.error('Failed to send order notification:', err.message);
   }
