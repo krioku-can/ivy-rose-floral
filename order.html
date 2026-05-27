@@ -386,6 +386,7 @@
       const pickupBtn = document.getElementById('pickupBtn');
       const deliveryBtn = document.getElementById('deliveryBtn');
       const deliverySection = document.getElementById('deliverySection');
+      const pickupSection = document.getElementById('pickupScheduleSection');
       const fulfillmentInput = document.getElementById('fulfillmentMethod');
       const notice = document.getElementById('fulfillmentNotice');
 
@@ -462,7 +463,7 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            size: size,
+            size: document.getElementById('sizeSelect').value,
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
