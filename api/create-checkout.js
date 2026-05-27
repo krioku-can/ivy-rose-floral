@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const nodemailer = require('nodemailer');
 
 // Haversine distance in miles
 function haversine(lat1, lon1, lat2, lon2) {
@@ -16,6 +17,68 @@ function haversine(lat1, lon1, lat2, lon2) {
 const ORIGIN_LAT = 39.3754;
 const ORIGIN_LON = -84.5594;
 const MAX_DELIVERY_MILES = 20;
+
+// Create Gmail transporter once
+let transporter = null;
+function getTransporter() {
+  if (!transporter && process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    });
+  }
+  return transporter;
+}
+
+async function sendOrderNotification(orderDetails) {
+  const t = getTransporter();
+  if (!t) {
+    console.error('Email not configured — set GMAIL_USER and GMAIL_APP_PASSWORD');
+    return;
+  }
+
+  const { itemName, totalCents, fulfillmentMethod, name, phone, email,
+          pickupDate, pickupTime, deliveryDay, deliveryTime, recipient,
+          deliveryAddress, cardMessage, specialInstructions, methodLabel } = orderDetails;
+
+  const totalFormatted = '$' + (totalCents / 100).toFixed(2);
+  const emailBody = [
+    '🌸 New Ivy & Rose Order!',
+    '',
+    `Size: ${itemName}`,
+    `Total: ${totalFormatted}`,
+    '',
+    `Customer: ${name || 'Unknown'}`,
+    `Phone: ${phone || 'Not provided'}`,
+    `Email: ${email || 'Not provided'}`,
+    '',
+    methodLabel,
+    ...(fulfillmentMethod === 'delivery' ? [
+      `Recipient: ${recipient || 'N/A'}`,
+      `Address: ${deliveryAddress || 'N/A'}`,
+    ] : []),
+    '',
+    `Card Message: ${cardMessage || 'None'}`,
+    `Special Instructions: ${specialInstructions || 'None'}`,
+    '',
+    'View in Stripe: https://dashboard.stripe.com/payments',
+  ].join('\n');
+
+  try {
+    const info = await t.sendMail({
+      from: `"Ivy & Rose Orders" <${process.env.GMAIL_USER}>`,
+      to: process.env.NOTIFY_EMAIL || process.env.GMAIL_USER,
+      subject: `🌸 New Order — ${itemName} — ${totalFormatted}`,
+      text: emailBody,
+    });
+    console.log('Order notification sent:', info.messageId);
+  } catch (err) {
+    console.error('Failed to send order notification:', err.message);
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -70,7 +133,6 @@ export default async function handler(req, res) {
             });
           }
         }
-        // If geocoding fails, allow through — don't block orders on geocoding errors
       } catch (geoErr) {
         console.error('Server-side geocoding failed (allowing order through):', geoErr.message);
       }
@@ -154,44 +216,24 @@ export default async function handler(req, res) {
       ? `Pickup: ${pickupDate || 'TBD'} at ${pickupTime || 'TBD'}`
       : `Delivery: ${deliveryDay || 'TBD'}, ${deliveryTime || 'TBD'}`;
 
-    const emailBody = [
-      '🌸 New Ivy & Rose Order!',
-      '',
-      `Size: ${item.name}`,
-      `Price: $${(item.price / 100).toFixed(2)}${fulfillmentMethod === 'delivery' ? ' + $10 delivery' : ''}`,
-      `Total: $${(totalCents / 100).toFixed(2)}`,
-      '',
-      `Customer: ${name || 'Unknown'}`,
-      `Phone: ${phone || 'Not provided'}`,
-      `Email: ${email || 'Not provided'}`,
-      '',
+    // Fire and forget — don't block the response on email
+    sendOrderNotification({
+      itemName: item.name,
+      totalCents,
+      fulfillmentMethod,
+      name,
+      phone,
+      email,
+      pickupDate,
+      pickupTime,
+      deliveryDay,
+      deliveryTime,
+      recipient,
+      deliveryAddress,
+      cardMessage,
+      specialInstructions,
       methodLabel,
-      ...(fulfillmentMethod === 'delivery' ? [
-        `Recipient: ${recipient || 'N/A'}`,
-        `Address: ${deliveryAddress || 'N/A'}`,
-      ] : []),
-      '',
-      `Card Message: ${cardMessage || 'None'}`,
-      `Special Instructions: ${specialInstructions || 'None'}`,
-      '',
-      'View in Stripe: https://dashboard.stripe.com/payments',
-    ].join('\n');
-
-    if (process.env.RESEND_API_KEY) {
-      fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: 'Ivy & Rose Orders <onboarding@resend.dev>',
-          to: ['ivyrosefloralco@gmail.com'],
-          subject: `🌸 New Order — ${item.name} — $${(totalCents / 100).toFixed(2)}`,
-          text: emailBody,
-        }),
-      }).catch(err => console.error('Email notification failed:', err.message));
-    }
+    });
 
     res.status(200).json({ sessionId: session.id, url: session.url });
   } catch (err) {

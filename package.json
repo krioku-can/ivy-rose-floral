@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "nodemailer": "^8.0.9",
     "stripe": "^17.0.0"
   }
 }
